@@ -8,8 +8,8 @@
 <!DOCTYPE html>
 <html>
     <%
-            CrudProduto crudProduto = new CrudProduto();
-            Produto produto = crudProduto.getProduto(Integer.parseInt(request.getParameter("id")));
+        CrudProduto crudProduto = new CrudProduto();
+        Produto produto = crudProduto.getProduto(Integer.parseInt(request.getParameter("id")));
     %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -17,6 +17,7 @@
     </head>
 
     <body>
+        <a href="paginaCarrinho.jsp">Carrinho (0)</a>
         <h1><% out.println(produto.getNome()); %></h1>
         <img src="<% out.println(produto.getImagem()); %>" width="90" height="120">
         <p>Preço: R$ <% out.println(produto.getPrecoFormatado()); %></p>
