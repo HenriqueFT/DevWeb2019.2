@@ -21,9 +21,9 @@ public class Produto {
     private String descricao;
     private String imagem;
     private int estoque;
-    
+
     public Produto() {}
-    
+
     public Produto(ResultSet result) {
         try {
             this.id = result.getInt("id");
@@ -60,11 +60,11 @@ public class Produto {
     public String getPrecoFormatado() {
         String integer_part = Integer.toString((int) Math.round(this.preco));
         String decimal_part = Integer.toString((int) ((this.preco % 1) * 100));
-        
+
         if (decimal_part.length() == 1) {
             decimal_part += "0";
         }
-        
+
         return integer_part + ',' + decimal_part;
     }
 

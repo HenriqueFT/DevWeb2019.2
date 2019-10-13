@@ -44,24 +44,24 @@ public class CrudProduto {
     
     public Produto getProduto(int ID) {
         Produto produto = null;
-        
+
         Connection conn=Database.getConnection();
         try {
             Statement select = conn.createStatement();
             ResultSet resp = select.executeQuery("SELECT * FROM produto WHERE id=" + Integer.toString(ID));
-            
+
             resp.first();
-            
+
             produto = new Produto(resp);
-            
+
             select.close();
             resp.close();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(CrudProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return produto;
     }
-    
+
 }

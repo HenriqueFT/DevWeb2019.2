@@ -15,7 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <% out.println("<title>Produto - " + produto.getNome() + "</title>"); %>
     </head>
-  
+
     <body>
         <h1><% out.println(produto.getNome()); %></h1>
         <img src="<% out.println(produto.getImagem()); %>" width="90" height="120">

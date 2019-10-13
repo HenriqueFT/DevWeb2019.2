@@ -17,7 +17,7 @@
             List<Produto> produtos = crudProduto.getProdutos();
             Iterator<Produto> iProdutos = produtos.iterator();
         %>
-        
+
         <table>
             <thead>
                 <tr>
