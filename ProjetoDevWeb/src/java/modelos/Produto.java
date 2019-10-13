@@ -5,6 +5,11 @@
  */
 package modelos;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Usuario
@@ -16,6 +21,21 @@ public class Produto {
     private String descricao;
     private String imagem;
     private int estoque;
+    
+    public Produto() {}
+    
+    public Produto(ResultSet result) {
+        try {
+            this.id = result.getInt("id");
+            this.nome = result.getString("nome");
+            this.preco = result.getDouble("preco");
+            this.descricao = result.getString("descricao");
+            this.imagem = "img/" + result.getString("imagem");
+            this.estoque = result.getInt("estoque");
+        } catch (SQLException ex) {
+            Logger.getLogger(Produto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public int getId() {
         return id;
@@ -35,6 +55,17 @@ public class Produto {
 
     public double getPreco() {
         return preco;
+    }
+    
+    public String getPrecoFormatado() {
+        String integer_part = Integer.toString((int) Math.round(this.preco));
+        String decimal_part = Integer.toString((int) ((this.preco % 1) * 100));
+        
+        if (decimal_part.length() == 1) {
+            decimal_part += "0";
+        }
+        
+        return integer_part + ',' + decimal_part;
     }
 
     public void setPreco(double preco) {

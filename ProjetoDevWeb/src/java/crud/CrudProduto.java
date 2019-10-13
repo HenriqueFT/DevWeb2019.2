@@ -25,6 +25,7 @@ public class CrudProduto {
             ResultSet resp = select.executeQuery("select * from produto");
             while(resp.next()){
                 Produto prod = new Produto();
+                prod.setId(resp.getInt("id"));
                 prod.setNome(resp.getString("nome"));
                 prod.setPreco(resp.getDouble("preco"));
                 prod.setDescricao(resp.getString("descricao"));
@@ -38,8 +39,29 @@ public class CrudProduto {
             Logger.getLogger(CrudProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
         return produtos;
+    }
+    
+    public Produto getProduto(int ID) {
+        Produto produto = null;
+        
+        Connection conn=Database.getConnection();
+        try {
+            Statement select = conn.createStatement();
+            ResultSet resp = select.executeQuery("SELECT * FROM produto WHERE id=" + Integer.toString(ID));
+            
+            resp.first();
+            
+            produto = new Produto(resp);
+            
+            select.close();
+            resp.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CrudProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return produto;
     }
     
 }
