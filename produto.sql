@@ -21,27 +21,100 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `projeto`
 --
-
+CREATE SCHEMA IF NOT EXISTS `Projeto`;
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `produto`
 --
+CREATE TABLE IF NOT EXISTS `Projeto`.`Produto` (
+  `idProduto` INT NOT NULL,
+  `Nome` VARCHAR(45) NOT NULL,
+  `Preco` DECIMAL(4,2) NOT NULL,
+  `Descrição` VARCHAR(100) NULL,
+  `Imagem` VARCHAR(50)  NULL,
+  `Estoque` INT  NULL,
+  PRIMARY KEY (`idProduto`))
+ENGINE = InnoDB;
 
-CREATE TABLE `produto` (
-  `ID` int(11) NOT NULL,
-  `nome` varchar(50) NOT NULL,
-  `preco` float NOT NULL,
-  `descricao` varchar(100) NOT NULL DEFAULT '',
-  `imagem` varchar(100) DEFAULT NULL,
-  `estoque` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+--
+-- Estrutura da tabela `Usuario`
+--
+CREATE TABLE IF NOT EXISTS `Projeto`.`Usuario` (
+  `UserID` INT NOT NULL,
+  `Nome` VARCHAR(50) NOT NULL,
+  `CPF` INT NOT NULL,
+  `IsADM` TINYINT NOT NULL,
+  `Cidade` VARCHAR(50) NULL,
+  `Endereco` VARCHAR(50) NOT NULL,
+  `NFuncionario` INT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`UserID`),
+  UNIQUE INDEX `CPF_UNIQUE` (`CPF` ASC) VISIBLE,
+  UNIQUE INDEX `NFuncionario_UNIQUE` (`NFuncionario` ASC) VISIBLE,
+  INDEX `Cidade_idx` (`Cidade` ASC) VISIBLE,
+  CONSTRAINT `Cidade`
+    FOREIGN KEY (`Cidade`)
+    REFERENCES `Projeto`.`Frete` (`Cidade`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+--
+-- Estrutura da tabela `Frete`
+--
+CREATE TABLE IF NOT EXISTS `Projeto`.`Frete` (
+  `Cidade` VARCHAR(50) NOT NULL,
+  `Valor` DECIMAL(4,2) NOT NULL,
+  PRIMARY KEY (`Cidade`))
+ENGINE = InnoDB;
+
+--
+-- Estrutura da tabela `Favoritos`
+--
+CREATE TABLE IF NOT EXISTS `Projeto`.`Favoritos` (
+  `UserID` INT NOT NULL,
+  `idProduto` INT NOT NULL,
+  PRIMARY KEY (`UserID`, `idProduto`),
+  INDEX `Produto_idx` (`idProduto` ASC) VISIBLE,
+  INDEX `Usuario_idx` (`UserID` ASC) VISIBLE,
+  CONSTRAINT `Produto`
+    FOREIGN KEY (`idProduto`)
+    REFERENCES `Projeto`.`Produto` (`idProduto`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `Usuario`
+    FOREIGN KEY (`UserID`)
+    REFERENCES `Projeto`.`Usuario` (`UserID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+--
+-- Estrutura da tabela `Avaliacoes`
+--
+CREATE TABLE IF NOT EXISTS `Projeto`.`Avaliacoes` (
+  `UserID` INT NOT NULL,
+  `idProduto` INT NOT NULL,
+  `Nota` INT NOT NULL,
+  PRIMARY KEY (`UserID`, `idProduto`),
+  INDEX `Produto_idx` (`idProduto` ASC) VISIBLE,
+  CONSTRAINT `User`
+    FOREIGN KEY (`UserID`)
+    REFERENCES `Projeto`.`Usuario` (`UserID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `Produto`
+    FOREIGN KEY (`idProduto`)
+    REFERENCES `Projeto`.`Produto` (`idProduto`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
 
 --
 -- Extraindo dados da tabela `produto`
 --
 
-INSERT INTO `produto` (`ID`, `nome`, `preco`, `descricao`, `imagem`, `estoque`) VALUES
+INSERT INTO `produto` (`idProduto`, `nome`, `preco`, `descricao`, `imagem`, `estoque`) VALUES
 (1, 'E o vento levou', 10, 'filme muito top', NULL, NULL),
 (2, 'tinta fresca', 2, 'filme um pouco menos top', NULL, NULL),
 (3, 'hellraiser', 7, 'um filme meio bunda', NULL, NULL);
@@ -53,9 +126,9 @@ INSERT INTO `produto` (`ID`, `nome`, `preco`, `descricao`, `imagem`, `estoque`) 
 --
 -- Índices para tabela `produto`
 --
-ALTER TABLE `produto`
-  ADD PRIMARY KEY (`ID`);
-COMMIT;
+--ALTER TABLE `produto`
+--  ADD PRIMARY KEY (`ID`);
+--COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
