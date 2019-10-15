@@ -12,11 +12,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Sociedade</title>
     </head>
 
     <body>
-        <h1>Hello mundo</h1>
+        <h1>1001 filmes para ver antes de morrermos numa guerra nuclear</h1>
         <%
             ProdutoDAO produtoDAO = new ProdutoDAO();
             List<Produto> produtos = produtoDAO.getProdutos();
@@ -49,5 +49,6 @@
 
         
         %>
-</body>
+        <a href="paginaInsert.jsp">Inserir Item</a>
+    </body>
 </html>

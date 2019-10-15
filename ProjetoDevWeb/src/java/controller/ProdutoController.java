@@ -1,6 +1,6 @@
 package controller;
 
-import crud.CrudProduto;
+import DAO.ProdutoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -15,18 +15,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelos.Produto;
+import modelos.Usuario;
 
 @WebServlet(name = "ProdutoController", urlPatterns = {"/ProdutoController"})
-public class ProdutoController {
-  /*private static final long serialVersionUID = 1L;
+
+public class ProdutoController extends HttpServlet {
+    private static final long serialVersionUID = 1L;
     private static String INSERT = "/produtoInsertForm.jsp";
     private static String UPDATE = "/produtoUpdateForm.jsp";
-    private static String LIST_PRODUTO = "/ListaProdutos.jsp";
-    private CrudProduto dao;
+    private static String LIST_PRODUTOS = "/index.jsp";
+    
+    //ID Nome Descricao Preco Imagem Estoque
+    private static String NOME ="nome";
+    private static String DESCRICAO ="descricao";
+    private static String PRECO ="preco";
+    private static String IMAGEM ="imagem";
+    private static String ESTOQUE ="estoque";
+    
+    private ProdutoDAO dao;
     
     public ProdutoController() {
         super();
-        dao = new CrudProduto();
+        dao = new ProdutoDAO();
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,7 +51,7 @@ public class ProdutoController {
             
         if (action == null){   
             System.out.println("action null");
-            forward = LIST_PRODUTO;
+            forward = LIST_PRODUTOS;
             request.setAttribute("ProdutoDAO", dao.getProdutos());
         } else if (action.equalsIgnoreCase("insert")){
             System.out.println("insert");
@@ -52,7 +62,7 @@ public class ProdutoController {
  
         }else if (action.equalsIgnoreCase("userList")){
             System.out.println("ProdutoList");
-            forward = LIST_PRODUTO;
+            forward = LIST_PRODUTOS;
             request.setAttribute("ProdutoDAO", dao.getProdutos());
         } else if (action.equalsIgnoreCase("update")){
             System.out.println("update");
@@ -65,7 +75,7 @@ public class ProdutoController {
             System.out.println("delete");
             int id = Integer.parseInt(request.getParameter("id"));
             dao.deleteProduto(id);
-            forward = LIST_PRODUTO;
+            forward = LIST_PRODUTOS;
             request.setAttribute("ProdutoDAO", dao.getProdutos());    
         }  else {
             System.out.println("insert or edit");
@@ -76,5 +86,50 @@ public class ProdutoController {
         view.forward(request, response);
                 
     }
-    */
+     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Produto produto = new Produto();
+               
+        int id = 0;
+        try {
+            id = Integer.parseInt(request.getParameter("id"));
+        } catch(Exception e){
+            e.printStackTrace();
+            id = -1;
+        } 
+        
+        //ID Nome Descricao Preco Imagem Estoque
+        produto.setId(id);
+        produto.setNome(request.getParameter(NOME));
+        produto.setDescricao(request.getParameter(DESCRICAO));
+        produto.setPreco(Double.parseDouble(request.getParameter(PRECO)));
+        produto.setImagem(request.getParameter(IMAGEM));
+        produto.setEstoque(Integer.parseInt(request.getParameter(ESTOQUE)));
+        
+        
+        //--------------------Fazer checagem se eh adm depois------------------
+        /*CODIGO  DO PROFESSOR
+        String administrador = request.getParameter("admin");
+        if (administrador == null || "".equals(administrador)){
+            administrador = "0";
+        }
+        user.setAdmin(Integer.parseInt(administrador));
+        // data de acesso eh controlada pelo BD
+        dao.checkUser(user);
+        */
+        
+        //--------------------O que estou incluindo
+        /*Temos que ver qual o usuario da sessao e ver se eh adm
+            if(Usuario.isADM(usuario)){
+             dao.addProduto(produto);
+            }
+        */
+       
+        dao.addProduto(produto);//Por enquanto nao tem protecao de quem faz isso
+        
+        RequestDispatcher view = request.getRequestDispatcher(LIST_PRODUTOS);
+        request.setAttribute("produtoDAO", dao.getProdutos());
+        view.forward(request, response);
+        
+     }
+    
 }
