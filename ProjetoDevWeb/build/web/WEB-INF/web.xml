@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	 version="3.1">
+    
+    <!--Este primeiro eh um exemplo a ser copiado para usarmos nos  demais controllers-->
+    <servlet>
+        <servlet-name>xxxController</servlet-name>
+        <servlet-class>controller.xxxController</servlet-class>
+    </servlet> 
+    <servlet-mapping>
+        <servlet-name>xxxController</servlet-name>
+        <url-pattern>/xxxController</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ProdutoController</servlet-name>
+        <servlet-class>controller.ProdutoController</servlet-class>
+    </servlet> 
+    <servlet-mapping>
+        <servlet-name>ProdutoController</servlet-name>
+        <url-pattern>/ProdutoController</url-pattern>
+    </servlet-mapping>
+        
+    <servlet>
+        <servlet-name>usuarioController</servlet-name>
+        <servlet-class>controller.usuarioController</servlet-class>
+    </servlet> 
+    <servlet-mapping>
+        <servlet-name>usuarioController</servlet-name>
+        <url-pattern>/usuarioController</url-pattern>
+    </servlet-mapping>
+    
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
