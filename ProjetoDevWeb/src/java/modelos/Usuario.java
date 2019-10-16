@@ -13,18 +13,31 @@ import java.util.ArrayList;
  */
 public class Usuario {
     
-    private int id;
+    private int userId;
     private String nome;
-    private int admin;
+    private int cpf;
+    private int isAdm;
+    private String cidade;
+    private String endereco;
+    private int nFuncionario;
     private ArrayList<Produto> favoritos;
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
+
+    public int getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(int cpf) {
+        this.cpf = cpf;
+    }
+    
 
     public String getNome() {
         return nome;
@@ -34,12 +47,36 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public int getAdmin() {
-        return admin;
+    public int getIsAdm() {
+        return isAdm;
     }
 
-    public void setAdmin(int admin) {
-        this.admin = admin;
+    public void setIsAdm(int isAdm) {
+        this.isAdm = isAdm;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public int getnFuncionario() {
+        return nFuncionario;
+    }
+
+    public void setnFuncionario(int nFuncionario) {
+        this.nFuncionario = nFuncionario;
     }
 
     public ArrayList<Produto> getFavoritos() {
@@ -49,7 +86,7 @@ public class Usuario {
     public void setFavoritos(ArrayList<Produto> favoritos) {
         this.favoritos = favoritos;
     }
-    
+
     //Esta funcao deve ser inplementada para sabermos se o usuario acessando tem direto de ver e executar
     //certas tarefas
     public static boolean isADM(Usuario usuario){
