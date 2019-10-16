@@ -7,11 +7,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Loja</title>
     </head>
   
     <body>
-        <h1>Hello mundo</h1>
+        <h1>Loja</h1>
         <%
             CrudProduto crudProduto = new CrudProduto();
             List<Produto> produtos = crudProduto.getProdutos();
@@ -19,24 +19,26 @@
         %>
 
         <table>
-            <thead>
+            <!--- <thead>
                 <tr>
                     <th>Nome</th>
                     <th>Descricao</th>
                     <th>Preço</th>
                 </tr>
-            </thead>
+            </thead> --->
         <%
-            while(iProdutos.hasNext()){
+            while (iProdutos.hasNext()) {
                 Produto produto = iProdutos.next();
         %>
             <tbody>
             <%
-                out.println( "<tr>" );
-                out.println( "<td><a href='paginaProduto.jsp?id=" + produto.getId() + "'>" + produto.getNome() +  "</a></td>");
-                out.println( "<td>" +produto.getDescricao()+  "</td>");
-                out.println( "<td>" +produto.getPreco()+  "</td>");
-                out.println( "</tr>" );
+                out.println("<tr>");
+                out.println("<td style='min-width:50px'><img src='" + produto.getImagem() + "' width='40' height='60'></td>");
+                out.println("<td style='min-width:150px'><a href='paginaProduto.jsp?id=" + produto.getId() + "'>" + produto.getNome() + "</a></td>");
+                out.println("<td style='min-width:250px'>" + produto.getDescricao() + "</td>");
+                out.println("<td style='min-width:50px'>R$" + produto.getPreco() + "</td>");
+                out.println("<td style='min-width:100px'><a href='paginaCarrinho.jsp?id="+produto.getId() + "'>Adicionar ao carrinho</a></td>");
+                out.println("</tr>");
             %>
             </tbody>
         <%
