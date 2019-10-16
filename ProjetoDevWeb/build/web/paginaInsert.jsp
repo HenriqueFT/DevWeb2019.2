@@ -8,11 +8,19 @@
         <title>Inserindo 8======D~~</title>
     </head>
     <body>
+        
         <h1>Insira um Produto</h1>
         <form method="POST" action="ProdutoController" name="formAddProduto" id="produtoForm">
             <table class="tableForm">
                 <!--ID Nome Descricao Preco Imagem Estoque-->
- 
+                <% if(request.getAttribute("action") == "update"){%>
+                <tr>
+                    <td>ID: </td>
+                    <td>
+                        <input type="text" name="nome"  value="<c:out value="${produto.id}"/>" >
+                    </td>
+                </tr>
+                <% }%>
                 <tr>
                     <td>Nome: </td>
                     <td>

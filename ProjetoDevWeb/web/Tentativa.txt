@@ -1,0 +1,23 @@
+        
+        <table class='tableList'>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descricao</th>
+                    <th>Preço</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <c:forEach items="${produtoDAO}" var="produto">
+                    <tr>
+                        <th><c:out value="${produto.Nome}" /></th>
+                        <th><c:out value="${produto.Descricao}" /></th>
+                        <th><c:out value="${produto.Preco}" /></th>
+                        <!--TEM QUE  ATUALIZAR AQUI PARA VER O ID PRA VERSE EH ADM,olhando a sessao-->
+                        <th><a href="ProdutoController?action=update&id=<c:out value="produto.id"/>">Update</a></th>
+                        <th><a href="ProdutoController?action=delete&id=<c:out value="produto.id"/>">Delete</a></th>
+                    </tr>
+                </c:forEach>
+            </tbody>
+          

@@ -9,28 +9,22 @@
     </head>
     <body>
         
-        <h1>Insira um Produto</h1>
-        <form method="POST" action="ProdutoController" name="formAddProduto" id="produtoForm">
+        <!--CASO SEJA PRODUTO-->
+        <h1>Atualize o Produto</h1>
+        <form method="POST" action="ProdutoController" name="formUpdateProduto" id="produtoFormUpdate">
             <table class="tableForm">
                 <!--ID Nome Descricao Preco Imagem Estoque-->
-                <% if(request.getAttribute("action") == "update"){%>
-                <tr>
-                    <td>ID: </td>
-                    <td>
-                        <input type="text" name="nome"  value="<c:out value="${produto.id}"/>" >
-                    </td>
-                </tr>
-                <% }%>
+ 
                 <tr>
                     <td>Nome: </td>
                     <td>
-                        <input type="text" name="nome"  value="<c:out value="${produto.nome}"/>" >
+                        <input type="text" name="nome"  value="" >
                     </td>
                 </tr>
                 <tr>
                     <td>Descricao: </td>
                     <td>
-                        <textarea rows="4" cols="50" name="descricao"  form="produtoForm"></textarea>
+                        <textarea rows="4" cols="50" name="descricao"  form="produtoFormUpdate"></textarea>
                         <!--input type="textarea" name="descricao"  value="<c:out value="${produto.descricao}"/>" -->
                     </td>
                 </tr>
@@ -57,6 +51,9 @@
                 </tr>
             </table>
         </form>
+                    
+                    
+                    
         <a href="index.jsp">Voltar a pagina principal</a>
     </body>
 </html>

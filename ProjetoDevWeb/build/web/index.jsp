@@ -12,27 +12,37 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Sociedade</title>
+        <title>Loja</title>
     </head>
 
     <body>
-        <h1>1001 filmes para ver antes de morrermos numa guerra nuclear</h1>
+        <h1>Loja</h1>
         <%
             ProdutoDAO produtoDAO = new ProdutoDAO();
             List<Produto> produtos = produtoDAO.getProdutos();
             Iterator<Produto> iProdutos = produtos.iterator();
         %>
         <table>
-            <thead>
+            <!--- <thead>
                 <tr>
                     <th>Nome</th>
                     <th>Descricao</th>
                     <th>Preço</th>
                 </tr>
-            </thead>
+            </thead> --->
+        <%
+            while (iProdutos.hasNext()) {
+                Produto produto = iProdutos.next();
+        %>
+            <tbody>
             <%
-                while (iProdutos.hasNext()) {
-                    Produto produto = iProdutos.next();
+                out.println("<tr>");
+                out.println("<td style='min-width:50px'><img src='" + produto.getImagem() + "' width='40' height='60'></td>");
+                out.println("<td style='min-width:150px'><a href='paginaProduto.jsp?id=" + produto.getId() + "'>" + produto.getNome() + "</a></td>");
+                out.println("<td style='min-width:250px'>" + produto.getDescricao() + "</td>");
+                out.println("<td style='min-width:50px'>R$" + produto.getPreco() + "</td>");
+                out.println("<td style='min-width:100px'><a href='paginaCarrinho.jsp?id="+produto.getId() + "'>Adicionar ao carrinho</a></td>");
+                out.println("</tr>");
             %>
             <tbody>
                 <%out.println("<tr>");
@@ -49,6 +59,7 @@
 
         
         %>
-        <a href="paginaInsert.jsp">Inserir Item</a>
+        <a href="paginaInsert.jsp">Inserir Item</a><br>
+        <a href="ProdutoController?action=update&id=0">Update Item (nao use)</a>
     </body>
 </html>
