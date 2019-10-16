@@ -73,14 +73,14 @@ public class UsuarioDAO {
     public void addUsuario(Usuario usu) {
         try {
             Connection conn=Database.getConnection();
-            PreparedStatement preparedStatement = conn.prepareStatement("insert into produto(nome, preco, descricao, imagem, estoque) values (?, ?, ?, ?, ?)");
+            PreparedStatement preparedStatement = conn.prepareStatement("insert into produto(Nome, CPF, IsADM, Cidade, Endereco, NFuncionario) values (?, ?, ?, ?, ?, ?)");
             // Parameters start with 1
             preparedStatement.setString(1, usu.getNome());
             preparedStatement.setInt(2, usu.getCpf());
             preparedStatement.setInt(3, usu.getIsAdm());
             preparedStatement.setString(4, usu.getCidade());
-            preparedStatement.setString(4, usu.getImagem());
-            preparedStatement.setInt(5, usu.getEstoque());             
+            preparedStatement.setString(5, usu.getEndereco());
+            preparedStatement.setInt(6, usu.getnFuncionario());             
             preparedStatement.executeUpdate();
             
             
@@ -90,10 +90,10 @@ public class UsuarioDAO {
         }
     }
     
-    public void deleteProduto(int id) {
+    public void deleteUsuario(int id) {
         try {
             Connection conn=Database.getConnection();
-            PreparedStatement preparedStatement = conn.prepareStatement("delete from produto where idProduto=?");
+            PreparedStatement preparedStatement = conn.prepareStatement("delete from usuario where UserID=?");
             // Parameters start with 1
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
@@ -103,20 +103,22 @@ public class UsuarioDAO {
         }
     }
     
-    public void updateProduto(Produto usu) {
+    public void updateUsuario(Usuario usu) {
         try {
             Connection conn=Database.getConnection();
-            PreparedStatement preparedStatement = conn.prepareStatement("update produto set nome=?, preco=?, descricao=?, imagem=?, estoque=?"
-                    + " where idProduto=?");
+            PreparedStatement preparedStatement = conn.prepareStatement("update produto set Nome=?, CPF=?, IsADM=?, Cidade=?, Endereco=?, NFUncionario=?"
+                    + " where UserID=?");
             //System.out.println(new java.sql.Date(user.getAcesso().getTime()));
           // Parameters start with 1
-            preparedStatement.setString(1, usu.getNome());
-            preparedStatement.setDouble(2, usu.getPreco());
-            preparedStatement.setString(3, usu.getDescricao());
-            preparedStatement.setString(4, usu.getImagem());
-            preparedStatement.setInt(5, usu.getEstoque()); 
-            preparedStatement.setInt(6, usu.getId()); 
+             preparedStatement.setString(1, usu.getNome());
+            preparedStatement.setInt(2, usu.getCpf());
+            preparedStatement.setInt(3, usu.getIsAdm());
+            preparedStatement.setString(4, usu.getCidade());
+            preparedStatement.setString(5, usu.getEndereco());
+            preparedStatement.setInt(6, usu.getnFuncionario());           
+            preparedStatement.setInt(7, usu.getUserId());  
             preparedStatement.executeUpdate();
+            
             
             conn.close();
         } catch (SQLException e) {
