@@ -50,7 +50,11 @@ public class Usuario {
         this.favoritos = favoritos;
     }
     
-    
-    
+    //Esta funcao deve ser inplementada para sabermos se o usuario acessando tem direto de ver e executar
+    //certas tarefas
+    public static boolean isADM(Usuario usuario){
+        
+        return true;
+    }
     
 }

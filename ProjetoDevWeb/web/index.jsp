@@ -1,6 +1,11 @@
+<%-- 
+    Document   : index
+    Created on : 08/10/2019, 19:07:11
+    Author     : Usuario
+--%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
-<%@page import="crud.CrudProduto"%>
+<%@page import="DAO.ProdutoDAO"%>
 <%@page import="modelos.Produto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,15 +14,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Loja</title>
     </head>
-  
+
     <body>
         <h1>Loja</h1>
         <%
-            CrudProduto crudProduto = new CrudProduto();
-            List<Produto> produtos = crudProduto.getProdutos();
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            List<Produto> produtos = produtoDAO.getProdutos();
             Iterator<Produto> iProdutos = produtos.iterator();
         %>
-
         <table>
             <!--- <thead>
                 <tr>
@@ -40,10 +44,21 @@
                 out.println("<td style='min-width:100px'><a href='paginaCarrinho.jsp?id="+produto.getId() + "'>Adicionar ao carrinho</a></td>");
                 out.println("</tr>");
             %>
-            </tbody>
-        <%
-            }
-        %>
+            <tbody>
+                <%out.println("<tr>");
+                    out.println("<td>" + produto.getNome() + "</td>");
+                    out.println("<td>" + produto.getDescricao() + "</td>");
+                    out.println("<td>" + produto.getPreco() + "</td>");
+            out.println("</tr>");%>
+
+                <%
+                    }
+                %>
         </table>
+        <% 
+
+        
+        %>
+        <a href="paginaInsert.jsp">Inserir Item</a>
     </body>
 </html>
