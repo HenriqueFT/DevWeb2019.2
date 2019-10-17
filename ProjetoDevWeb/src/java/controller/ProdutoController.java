@@ -20,7 +20,6 @@ import modelos.Usuario;
 @WebServlet(name = "ProdutoController", urlPatterns = {"/ProdutoController"})
 
 public class ProdutoController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
     private static String INSERT = "/paginaInsert.jsp";
     private static String UPDATE = "/paginaInsert.jsp";
     private static String LIST_PRODUTOS = "/bancoDeDados.jsp";
@@ -92,14 +91,17 @@ public class ProdutoController extends HttpServlet {
          
          
         int id = 0;
-        try {
-            id = Integer.parseInt(request.getParameter("id"));
-            System.out.println("O id deveria ter valor"+id);
-        } catch(Exception e){
-            e.printStackTrace();
-            id = -1;
-        } 
         
+        if(s.equals("update")){
+            try {
+                id = Integer.parseInt(request.getParameter("id"));
+                System.out.println("O id deveria ter valor"+id);
+            } catch(Exception e){
+                e.printStackTrace();
+                id = -1;
+            }
+        } 
+            
         //ID Nome Descricao Preco Imagem Estoque
         produto.setId(id);
         produto.setNome(request.getParameter(NOME));

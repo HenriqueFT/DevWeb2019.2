@@ -14,7 +14,7 @@
             <table class="tableForm">
                 <!--ID Nome Descricao Preco Imagem Estoque-->
                 <% if(request.getAttribute("action") == "update"){
-                    request.getSession().setAttribute("action", "update"); 
+                    request.getSession().setAttribute("action", "update");
                 }%>
                 <tr>
                     <td>ID: </td>
