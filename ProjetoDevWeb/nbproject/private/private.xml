@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/DevWeb2019.2/ProjetoDevWeb/src/java/crud/CrudProduto.java</file>
-            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/DevWeb2019.2/ProjetoDevWeb/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/DevWeb2019.2/ProjetoDevWeb/src/java/codigo/Database.java</file>
-            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/DevWeb2019.2/ProjetoDevWeb/src/java/controller/ProdutoController.java</file>
-            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/DevWeb2019.2/ProjetoDevWeb/web/index.jsp</file>
+            <file>file:/C:/Users/julia/Desktop/Coding/devweb/ProjetoDevWeb/web/paginaLoginOuCadastro.jsp</file>
+            <file>file:/C:/Users/julia/Desktop/Coding/devweb/ProjetoDevWeb/web/index.jsp</file>
+            <file>file:/C:/Users/julia/Desktop/Coding/devweb/ProjetoDevWeb/src/java/modelos/Produto.java</file>
         </group>
     </open-files>
 </project-private>
