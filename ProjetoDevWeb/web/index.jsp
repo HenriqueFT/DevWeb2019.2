@@ -17,6 +17,9 @@
 
     <body>
         <h1>Loja</h1>
+        <br>
+        <a href="ProdutoController?">Banco de  Dados</a>
+        <br><br>
         <%
             ProdutoDAO produtoDAO = new ProdutoDAO();
             List<Produto> produtos = produtoDAO.getProdutos();
@@ -59,7 +62,6 @@
 
         
         %>
-        <a href="paginaInsert.jsp">Inserir Item</a><br>
-        <a href="ProdutoController?action=update&id=0">Update Item (nao use)</a>
+
     </body>
 </html>

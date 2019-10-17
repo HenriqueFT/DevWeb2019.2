@@ -23,7 +23,7 @@ public class ProdutoController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static String INSERT = "/paginaInsert.jsp";
     private static String UPDATE = "/paginaInsert.jsp";
-    private static String LIST_PRODUTOS = "/index.jsp";
+    private static String LIST_PRODUTOS = "/bancoDeDados.jsp";
     
     //ID Nome Descricao Preco Imagem Estoque
     private static String NOME ="nome";
@@ -47,7 +47,7 @@ public class ProdutoController extends HttpServlet {
         } catch(Exception e){
             action = "ListaProdutos";
         }
-        System.out.println("EU COMO CU");
+        System.out.println("Cheguei aqui");
             
         if (action == null){   
             forward = LIST_PRODUTOS;
@@ -55,18 +55,19 @@ public class ProdutoController extends HttpServlet {
         } else if (action.equalsIgnoreCase("insert")){
             forward = INSERT;
             int id = Integer.parseInt(request.getParameter("id"));
-            Produto produto = dao.getProduto(id);
-            request.setAttribute("Produto", produto);
+            Produto produto = dao.getProduto(id); 
+            request.setAttribute("action", "insert");
+            request.setAttribute("produto", produto);
         }else if (action.equalsIgnoreCase("listaProdutos")){
             forward = LIST_PRODUTOS;
             request.setAttribute("ProdutoDAO", dao.getProdutos());
         } else if (action.equalsIgnoreCase("update")){
             System.out.println("UPDATE");
             forward = UPDATE;
-            request.setAttribute("action", "update");
             int id = Integer.parseInt(request.getParameter("id"));
             Produto produto = dao.getProduto(id);
-            request.setAttribute("Produto", produto);  
+            request.setAttribute("action", "update");
+            request.setAttribute("produto", produto);  
         } else if (action.equalsIgnoreCase("delete")){
             int id = Integer.parseInt(request.getParameter("id"));
             dao.deleteProduto(id);
@@ -82,10 +83,18 @@ public class ProdutoController extends HttpServlet {
     }
      protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Produto produto = new Produto();
-               
+         System.out.println("Parametro ID :"+request.getParameter("id"));
+         
+        String s ="";
+        if(request.getSession().getAttribute("action") != null){
+            s = (String) request.getSession().getAttribute("action");
+        }
+         
+         
         int id = 0;
         try {
             id = Integer.parseInt(request.getParameter("id"));
+            System.out.println("O id deveria ter valor"+id);
         } catch(Exception e){
             e.printStackTrace();
             id = -1;
@@ -117,14 +126,16 @@ public class ProdutoController extends HttpServlet {
              dao.addProduto(produto);
             }
         */
-        if(request.getAttribute("action") == "update"){
+
+        
+        if(s.equals("update")){
             dao.updateProduto(produto);
         }else{
             dao.addProduto(produto);//Por enquanto nao tem protecao de quem faz isso 
         }
         
         RequestDispatcher view = request.getRequestDispatcher(LIST_PRODUTOS);
-        request.setAttribute("produtoDAO", dao.getProdutos());
+        request.setAttribute("ProdutoDAO", dao.getProdutos());
         view.forward(request, response);
         
      }

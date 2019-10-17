@@ -5,22 +5,23 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Inserindo 8======D~~</title>
+        <title>Forms</title>
     </head>
     <body>
-        
-        <h1>Insira um Produto</h1>
+        <% if(request.getAttribute("produto") != null || request.getAttribute("produto") == null ){ %>
+        <h1>Adicione ou inclua</h1>
         <form method="POST" action="ProdutoController" name="formAddProduto" id="produtoForm">
             <table class="tableForm">
                 <!--ID Nome Descricao Preco Imagem Estoque-->
-                <% if(request.getAttribute("action") == "update"){%>
+                <% if(request.getAttribute("action") == "update"){
+                    request.getSession().setAttribute("action", "update"); 
+                }%>
                 <tr>
                     <td>ID: </td>
                     <td>
-                        <input type="text" name="nome"  value="<c:out value="${produto.id}"/>" >
+                        <input type="text" name="id"  value="<c:out value="${produto.id}"/>" readonly="readonly" >
                     </td>
                 </tr>
-                <% }%>
                 <tr>
                     <td>Nome: </td>
                     <td>
@@ -30,7 +31,7 @@
                 <tr>
                     <td>Descricao: </td>
                     <td>
-                        <textarea rows="4" cols="50" name="descricao"  form="produtoForm"></textarea>
+                        <textarea rows="4" cols="50" name="descricao"  form="produtoForm"><c:out value="${produto.descricao}"/></textarea>
                         <!--input type="textarea" name="descricao"  value="<c:out value="${produto.descricao}"/>" -->
                     </td>
                 </tr>
@@ -57,6 +58,9 @@
                 </tr>
             </table>
         </form>
+        <%} else {  %>
+        <h1>Houve um erro!!!</h1>
+        <%}%>
         <a href="index.jsp">Voltar a pagina principal</a>
     </body>
 </html>

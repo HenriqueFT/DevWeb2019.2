@@ -2,7 +2,7 @@ package controller;
 
 
 
-//import crud.xxxDAO; <- DESCOMENTE AQUI E MUDE O XXX
+//import DAO.xxxDAO; <- DESCOMENTE AQUI E MUDE O XXX
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
