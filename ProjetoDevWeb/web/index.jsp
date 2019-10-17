@@ -59,6 +59,7 @@
 
         
         %>
-        <a href="paginaInsert.jsp">Inserir Item</a>
+        <a href="paginaInsert.jsp">Inserir Item</a><br>
+        <a href="ProdutoController?action=update&id=0">Update Item (nao use)</a>
     </body>
 </html>

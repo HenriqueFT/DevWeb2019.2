@@ -10,16 +10,24 @@ package Modelos;
  * @author Usuario
  */
 public class Avaliacao {
-    private int id;
+    private int userId;
+    private int idProduto;
     private int nota;
-    private String comentario;
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(int idProduto) {
+        this.idProduto = idProduto;
     }
 
     public int getNota() {
@@ -30,12 +38,6 @@ public class Avaliacao {
         this.nota = nota;
     }
 
-    public String getComentario() {
-        return comentario;
-    }
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
-    }
     
 }

@@ -29,7 +29,7 @@ public class xxxController {
  /* private static final long serialVersionUID = 1L;
     private static String INSERT = "/xxxInsertForm.jsp";
     private static String UPDATE = "/xxxUpdateForm.jsp";
-    private static String LIST_xxx = "/userList.jsp";
+    private static String LIST_xxx = "/index.jsp";
     private Crudxxx dao;
     
     public xxxController() {
@@ -43,40 +43,32 @@ public class xxxController {
         try {
             action = request.getParameter("action");
         } catch(Exception e){
-            System.out.println("sem action");
             action = "ProductList";
         }
             
         if (action == null){   
-            System.out.println("action null");
             forward = LIST_xxx;
             request.setAttribute("xxxDAO", dao.getxxxs());
         } else if (action.equalsIgnoreCase("insert")){
-            System.out.println("insert");
             forward = INSERT;
             int id = Integer.parseInt(request.getParameter("id"));
             xxx xxx = dao.getxxx(id);
             request.setAttribute("xxx", xxx);
  
-        }else if (action.equalsIgnoreCase("userList")){
-            System.out.println("xxxList");
+        }else if (action.equalsIgnoreCase("Listaxxx")){
             forward = LIST_xxx;
             request.setAttribute("xxxDAO", dao.getxxxs());
         } else if (action.equalsIgnoreCase("update")){
-            System.out.println("update");
             forward = UPDATE;
             int id = Integer.parseInt(request.getParameter("id"));
-            xxx user = dao.getxxx(id);
-            request.setAttribute("xxx", user);  
+            xxx xxx = dao.getxxx(id);
+            request.setAttribute("xxx", xxx);  
         } else if (action.equalsIgnoreCase("delete")){
-         
-            System.out.println("delete");
             int id = Integer.parseInt(request.getParameter("id"));
             dao.deletexxx(id);
             forward = LIST_xxx;
             request.setAttribute("xxxDAO", dao.getxxxs());    
         }  else {
-            System.out.println("insert or edit");
             forward = INSERT;
         }
  
