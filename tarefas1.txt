@@ -1,0 +1,19 @@
+para seana que vem:
+-banco completo; Loivos
+-corrigir os modelos pro que for necessário; Loivos
+-crud completo das coisas mais basicas; victor
+-pagina principal; julia
+-pagina do item; wallace
+-cadastro do usuario;julia
+-pagina de login;victor
+-pagina do carrinho;wallace
+
+-todas as paginas criadas. não necessariamente funcionando, mas ao menos existindo e aparecendo;
+
+
+metas futuras:
+-compra/aluguel(carrinho);
+-sistema de avaliação;
+
+-login;
+-cookie;
