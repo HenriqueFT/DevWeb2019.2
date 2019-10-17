@@ -16,8 +16,8 @@
         <h4>Entre!</h4>
         
         <form> <!-- TODO: botar isso como tabela pra ficar menos feio -->
-            <p>Nome de usuário:
-            <input type="text" name="username" maxlength="15" required>
+            <p>CPF:
+            <input type="text" name="cpf" maxlength="15" required>
             </p>
             <p>Senha:
             <input type="password" id="password" name="password" maxlength="8" required>
@@ -36,32 +36,32 @@
         <form>
             <p>
                 Nome completo:
-                <input type="text" name="fullname" maxlength="100" required>
+                <input type="text" name="nome" maxlength="100" required>
             </p>
             
             <p>
-                Nome de usuário:
-                <input type="text" name="username" maxlength="20" required>
-            </p>
-            
-            <p>
-                E-mail:
-                <input type="email" name="email" required>
+                CPF:
+                <input type="text" name="cpf" minLength="11" maxlength="11" required>
             </p>
             
             <p>
                 Senha: 
-                <input type="password" name="password" required>
+                <input type="password" name="senha" required>
             </p>
             
             <p>
-                Senha: 
-                <input type="password" name="password_confirmation" required>
+                Confirme a senha: 
+                <input type="password" name="senha_confirmacao" required>
+            </p>
+            
+            <p>
+                Cidade: 
+                <input type="text" name="cidade" required>
             </p>
             
             <p>
                 Endereço:
-                <textarea name="address" rows="2" columns="20" required></textarea>
+                <textarea name="endereco" rows="2" columns="20" required></textarea>
             </p>
 
             <input type="submit" value="Enviar">

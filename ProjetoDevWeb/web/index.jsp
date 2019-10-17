@@ -47,12 +47,6 @@
                 out.println("<td style='min-width:100px'><a href='paginaCarrinho.jsp?id="+produto.getId() + "'>Adicionar ao carrinho</a></td>");
                 out.println("</tr>");
             %>
-            <tbody>
-                <%out.println("<tr>");
-                    out.println("<td>" + produto.getNome() + "</td>");
-                    out.println("<td>" + produto.getDescricao() + "</td>");
-                    out.println("<td>" + produto.getPreco() + "</td>");
-            out.println("</tr>");%>
 
                 <%
                     }
