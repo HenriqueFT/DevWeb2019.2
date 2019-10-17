@@ -28,7 +28,7 @@ import modelos.Usuario;
 @WebServlet(name = "UsuarioController", urlPatterns = {"/UsuarioController"})
 public class UsuarioController {
     //ID Nom//ID Nome CPF isADM Cidade Endereco NFUncionarioe CPF isADM Cidade Endereco NFUncionario
-    private static String INSERT = "/paginaInsert.jsp";
+    private static String INSERT = "/paginaLoginOuCadastro.jsp";
     private static String UPDATE = "/xxxUpdateForm.jsp";
     private static String LIST_USUARIO = "/index.jsp";
     private UsuarioDAO dao;

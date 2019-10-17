@@ -33,7 +33,7 @@
         <h4>Insira suas informações abaixo:</h4>
         
         
-        <form>
+        <form method="POST" action="UsuarioController?action=insert" name="formAddUsuario" id="userForm">
             <p>
                 Nome completo:
                 <input type="text" name="nome" maxlength="100" required>
@@ -61,7 +61,7 @@
             
             <p>
                 Endereço:
-                <textarea name="endereco" rows="2" columns="20" required></textarea>
+                <textarea name="endereco" rows="2" columns="20" form="userForm" required></textarea>
             </p>
 
             <input type="submit" value="Enviar">
