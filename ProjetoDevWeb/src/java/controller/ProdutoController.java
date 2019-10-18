@@ -47,7 +47,6 @@ public class ProdutoController extends HttpServlet {
         } catch(Exception e){
             action = "ListaProdutos";
         }
-        System.out.println("EU COMO CU");
             
         if (action == null){   
             forward = LIST_PRODUTOS;

@@ -16,7 +16,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelos.Usuario; 
+import modelos.Usuario;
+import DAO.UsuarioDAO;
 
 //
 //------------------Todos os controllers com formato de CRUD podem ser assim,-----------------------
@@ -30,7 +31,7 @@ public class UsuarioController {
     private static String INSERT = "/paginaInsert.jsp";
     private static String UPDATE = "/xxxUpdateForm.jsp";
     private static String LIST_USUARIO = "/index.jsp";
-    private usuarioDAO dao;
+    private UsuarioDAO dao;
     
     private static String NOME="nome";
     private static String CPF="cpf";
@@ -42,7 +43,7 @@ public class UsuarioController {
     
     public UsuarioController() {
         super();
-        dao = new usuarioDAO();
+        dao = new UsuarioDAO();
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -96,12 +97,12 @@ public class UsuarioController {
         } 
         
         //ID Nome CPF isADM Cidade Endereco NFUncionario
-        usuario.setId(id);
-        usuario.setNome(request.getParameter(NOME));
-        usuario.setCPF(Integer.parseInt(request.getParameter(CPF)));
-        usuario.setAdmin(Integer.parseInt(request.getParameter(ISADM)));
+        //usuario.setId(id);
+        //usuario.setNome(request.getParameter(NOME));
+        //usuario.setCPF(Integer.parseInt(request.getParameter(CPF)));
+        //usuario.setAdmin(Integer.parseInt(request.getParameter(ISADM)));
         usuario.setCidade(request.getParameter(CIDADE));
-        usuario.setEndereco(Integer.parseInt(request.getParameter(ENDERECO)));
+        //usuario.setEndereco(Integer.parseInt(request.getParameter(ENDERECO)));
         
         
         //--------------------Fazer checagem se eh adm depois------------------
@@ -125,7 +126,7 @@ public class UsuarioController {
         dao.addUsuario(usuario);//Por enquanto nao tem protecao de quem faz isso
         
         RequestDispatcher view = request.getRequestDispatcher(LIST_USUARIO);
-        request.setAttribute("usuarioDAO", dao.getUsuario());
+        //request.setAttribute("usuarioDAO", dao.getUsuario());
         view.forward(request, response);
         
      }

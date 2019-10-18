@@ -79,8 +79,6 @@ public class UsuarioDAO {
             preparedStatement.setInt(2, usu.getCpf());
             preparedStatement.setInt(3, usu.getIsAdm());
             preparedStatement.setString(4, usu.getCidade());
-            preparedStatement.setString(4, usu.getImagem());
-            preparedStatement.setInt(5, usu.getEstoque());             
             preparedStatement.executeUpdate();
             
             
@@ -90,7 +88,7 @@ public class UsuarioDAO {
         }
     }
     
-    public void deleteProduto(int id) {
+    public void deleteUsuario(int id) {
         try {
             Connection conn=Database.getConnection();
             PreparedStatement preparedStatement = conn.prepareStatement("delete from produto where idProduto=?");
@@ -103,7 +101,7 @@ public class UsuarioDAO {
         }
     }
     
-    public void updateProduto(Produto usu) {
+    public void updateUsuario(Produto usu) {
         try {
             Connection conn=Database.getConnection();
             PreparedStatement preparedStatement = conn.prepareStatement("update produto set nome=?, preco=?, descricao=?, imagem=?, estoque=?"
