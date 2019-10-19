@@ -18,7 +18,7 @@
     <body>
         <h1>Loja</h1>
         <br>
-        <a href="ProdutoController?">Banco de  Dados</a>
+        <a href="ProdutoController?show=Produtos">Banco de  Dados</a>
         <br><br>
         <%
             ProdutoDAO produtoDAO = new ProdutoDAO();
