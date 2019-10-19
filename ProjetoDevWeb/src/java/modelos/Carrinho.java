@@ -1,44 +1,52 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Modelos;
+package modelos;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import DAO.ProdutoDAO;
 
-/**
- *
- * @author Usuario
- */
 public class Carrinho {
-    
     private int id;
-    private ArrayList<Produto> listaProdutos;
-    private ArrayList<Integer>  numeroProdutos;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
+    public HashMap<Integer, Integer> carrinho;
+    
+    public Carrinho(int id) {
         this.id = id;
+        this.carrinho = new HashMap<>();
     }
-
-    public ArrayList<Produto> getListaProdutos() {
-        return listaProdutos;
+    
+    public int getId() {
+        return this.id;
     }
-
-    public void setListaProdutos(ArrayList<Produto> listaProdutos) {
-        this.listaProdutos = listaProdutos;
+    
+    public void adicionarAoCarrinho(Produto produto, int quantidade) {
+        this.adicionarAoCarrinho(produto.getId(), quantidade);
     }
-
-    public ArrayList<Integer> getNumeroProdutos() {
-        return numeroProdutos;
+    
+    public void adicionarAoCarrinho(int idProduto, int quantidade) {
+        boolean hasKey = false;
+        Iterator it = this.carrinho.entrySet().iterator();
+        
+        while (it.hasNext()) {
+            HashMap.Entry pair = (HashMap.Entry)it.next();
+            
+            if (((Integer) pair.getKey()) == idProduto) {
+                pair.setValue(((Integer) pair.getValue()) + quantidade);
+                
+                hasKey = true;
+                break;
+            }
+        }
+        
+        if (!hasKey) {
+            this.carrinho.put(idProduto, quantidade);
+        }
     }
-
-    public void setNumeroProdutos(ArrayList<Integer> numeroProdutos) {
-        this.numeroProdutos = numeroProdutos;
+    
+    public int getQtdItens() {
+        int qtd = 0;
+        
+        HashMap<String, HashMap> selects = new HashMap<>();
+        qtd = this.carrinho.entrySet().stream().map((entry) -> entry.getValue()).reduce(qtd, Integer::sum);
+        
+        return qtd;
     }
-
 }

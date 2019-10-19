@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15-Out-2019 às 02:36
+-- Tempo de geração: 18-Out-2019 às 16:54
 -- Versão do servidor: 10.4.6-MariaDB
 -- versão do PHP: 7.3.9
 
@@ -33,6 +33,30 @@ CREATE TABLE `avaliacoes` (
   `idProduto` int(11) NOT NULL,
   `Nota` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `carrinho`
+--
+
+CREATE TABLE `carrinho` (
+  `idCarrinho` int(11) NOT NULL,
+  `idProduto` int(11) NOT NULL,
+  `quantidade` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `carrinho`
+--
+
+INSERT INTO `carrinho` (`idCarrinho`, `idProduto`, `quantidade`) VALUES
+(653434, 1, 1),
+(1303868, 1, 4),
+(1303868, 2, 2),
+(1303868, 3, 2),
+(1303868, 4, 1),
+(1303868, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -111,6 +135,13 @@ ALTER TABLE `avaliacoes`
   ADD KEY `Usuario_idx` (`UserID`);
 
 --
+-- Índices para tabela `carrinho`
+--
+ALTER TABLE `carrinho`
+  ADD PRIMARY KEY (`idCarrinho`,`idProduto`),
+  ADD KEY `idProduto` (`idProduto`);
+
+--
 -- Índices para tabela `favoritos`
 --
 ALTER TABLE `favoritos`
@@ -165,6 +196,12 @@ ALTER TABLE `usuario`
 ALTER TABLE `avaliacoes`
   ADD CONSTRAINT `ProdutoAvalia` FOREIGN KEY (`idProduto`) REFERENCES `produto` (`idProduto`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `UsuarioAvalia` FOREIGN KEY (`UserID`) REFERENCES `usuario` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `carrinho`
+--
+ALTER TABLE `carrinho`
+  ADD CONSTRAINT `carrinho_ibfk_1` FOREIGN KEY (`idProduto`) REFERENCES `produto` (`idProduto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `favoritos`
