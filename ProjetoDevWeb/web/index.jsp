@@ -18,6 +18,8 @@
     <body>
         <h1>Loja</h1>
         <br>
+        <a href="navigation.html">TESTE</a>
+        <br>
         <a href="ProdutoController?show=Produtos">Banco de  Dados</a>
         <br><br>
         <%
