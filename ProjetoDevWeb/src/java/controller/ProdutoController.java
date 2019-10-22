@@ -46,7 +46,6 @@ public class ProdutoController extends HttpServlet {
         } catch(Exception e){
             action = "ListaProdutos";
         }
-        System.out.println("Cheguei aqui");
             
         if (action == null){   
             forward = LIST_PRODUTOS;
@@ -82,26 +81,28 @@ public class ProdutoController extends HttpServlet {
     }
      protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Produto produto = new Produto();
-         System.out.println("Parametro ID :"+request.getParameter("id"));
+        System.out.println("Parametro ID :"+request.getParameter("id"));
          
         String s ="";
         if(request.getSession().getAttribute("action") != null){
             s = (String) request.getSession().getAttribute("action");
         }
-         
+        
+        System.out.println("ACTION : "+s);
          
         int id = 0;
         
         if(s.equals("update")){
             try {
                 id = Integer.parseInt(request.getParameter("id"));
-                System.out.println("O id deveria ter valor"+id);
+                System.out.println("O id deveria ter valor "+id);
             } catch(Exception e){
                 e.printStackTrace();
                 id = -1;
             }
         } 
-            
+        
+        
         //ID Nome Descricao Preco Imagem Estoque
         produto.setId(id);
         produto.setNome(request.getParameter(NOME));
@@ -131,8 +132,10 @@ public class ProdutoController extends HttpServlet {
 
         
         if(s.equals("update")){
+            System.out.println("Updating produto "+produto.getId());
             dao.updateProduto(produto);
         }else{
+            System.out.println("Adding produto");
             dao.addProduto(produto);//Por enquanto nao tem protecao de quem faz isso 
         }
         

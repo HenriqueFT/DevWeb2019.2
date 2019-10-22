@@ -18,7 +18,9 @@
     <body>
         <h1>Loja</h1>
         <br>
-        <a href="ProdutoController?">Banco de  Dados</a>
+        <a href="navigation.html">Nav TEST</a>
+        <br>
+        <a href="ProdutoController?show='Produtos'">Banco de  Dados</a>
         <br><br>
         <%
             ProdutoDAO produtoDAO = new ProdutoDAO();
@@ -40,7 +42,7 @@
             <tbody>
             <%
                 out.println("<tr>");
-                out.println("<td style='min-width:50px'><img src='" + produto.getImagem() + "' width='40' height='60'></td>");
+                out.println("<td style='min-width:50px'><img src='img/" + produto.getImagem() + "' width='40' height='60'></td>");
                 out.println("<td style='min-width:150px'><a href='paginaProduto.jsp?id=" + produto.getId() + "'>" + produto.getNome() + "</a></td>");
                 out.println("<td style='min-width:250px'>" + produto.getDescricao() + "</td>");
                 out.println("<td style='min-width:50px'>R$" + produto.getPreco() + "</td>");

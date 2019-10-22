@@ -17,23 +17,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelos.Usuario; 
-
+import modelos.Usuario;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 //
 //------------------Todos os controllers com formato de CRUD podem ser assim,-----------------------
 //------------------substitua o xxx com o  nome correto | Use CRTL-F         -----------------------
 //
 
-
 @WebServlet(name = "UsuarioController", urlPatterns = {"/UsuarioController"})
-public class UsuarioController {
+
+public class UsuarioController extends HttpServlet {
     //ID Nom//ID Nome CPF isADM Cidade Endereco NFUncionarioe CPF isADM Cidade Endereco NFUncionario
-    private static String INSERT = "/paginaInsert.jsp";
-    private static String UPDATE = "/xxxUpdateForm.jsp";
-    private static String LIST_USUARIO = "/index.jsp";
+    private static String INSERT = "/paginaLoginOuCadastro.jsp";
+    private static String UPDATE = "/xxxUpdateForm.jsp";            //<-- Essas3 ainda nao estao corretas
+    private static String LIST_USUARIO = "/bancoDeDados.jsp";
     private UsuarioDAO dao;
     
     private static String NOME="nome";
+    private static String SENHA="senha";
     private static String CPF="cpf";
     private static String ISADM="isADM";
     private static String CIDADE="cidade";
@@ -62,6 +65,7 @@ public class UsuarioController {
             forward = INSERT;
             int id = Integer.parseInt(request.getParameter("id"));
             Usuario usuario = dao.getUsuario(id);
+            request.setAttribute("action", "insert");
             request.setAttribute("Usuario", usuario);
         }else if (action.equalsIgnoreCase("ListaUsuarios")){
             forward = LIST_USUARIO;
@@ -70,6 +74,7 @@ public class UsuarioController {
             forward = UPDATE;
             int id = Integer.parseInt(request.getParameter("id"));
             Usuario usuario = dao.getUsuario(id);
+            request.setAttribute("action", "update");
             request.setAttribute("Usuario", usuario);  
         } else if (action.equalsIgnoreCase("delete")){
             int id = Integer.parseInt(request.getParameter("id"));
@@ -84,29 +89,53 @@ public class UsuarioController {
         view.forward(request, response);
                 
     }
-    
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Usuario usuario = new Usuario();
                
-        int id = 0;
-        try {
-            id = Integer.parseInt(request.getParameter("id"));
-        } catch(Exception e){
-            e.printStackTrace();
-            id = -1;
-        } 
+        String s ="";
         
+        if(request.getSession().getAttribute("action") != null){
+            s = (String) request.getSession().getAttribute("action");
+        }
+         
+        int id = 0;
+
         //ID Nome CPF isADM Cidade Endereco NFUncionario
+        if(s.equals("update") || s.equals("login")){
+            try {
+                id = Integer.parseInt(request.getParameter("id"));
+            } catch(Exception e){
+                e.printStackTrace();
+                id = -1;
+            } 
+        }
+        
+
+                
         usuario.setUserId(id);
         usuario.setNome(request.getParameter(NOME));
         usuario.setCpf(Integer.parseInt(request.getParameter(CPF)));
         usuario.setIsAdm(Integer.parseInt(request.getParameter(ISADM)));
-        usuario.setCidade(request.getParameter(CIDADE));
+       usuario.setCidade(request.getParameter(CIDADE));
         usuario.setEndereco(request.getParameter(ENDERECO));
         
+        String senha = request.getParameter(SENHA);
+        String senhaEncriptada="";
+        try {
+            //ID Nome CPF isADM Cidade Endereco NFUncionario
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(senha.getBytes());
+            senhaEncriptada = new String(md.digest());
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+        //usuario.setSenha(senhaEncriptada);
         
-        //--------------------Fazer checagem se eh adm depois------------------
-        /*CODIGO  DO PROFESSOR
+        //--------------------Fazer checagem se eh adm depois------------------ 
+         
+              /*CODIGO  DO PROFESSOR
         String administrador = request.getParameter("admin");
         if (administrador == null || "".equals(administrador)){
             administrador = "0";
@@ -122,10 +151,25 @@ public class UsuarioController {
              dao.addProduto(produto);
             }
         */
-       
         dao.addUsuario(usuario);//Por enquanto nao tem protecao de quem faz isso
+        if(s.equals("login")){
+            
+        }else if(s.equals("update")){
+            dao.updateUsuario(usuario);
+        }else{
+            dao.addUsuario(usuario);//Por enquanto nao tem protecao de quem faz isso
+        }
+        
+        //!!!!!!!!!!!!!!!!!!!!!!!NAO COMPLETO CORRETAMENTE!!!!!!!!!!!!!!!!!!!!!!!
+        //----------------------------------- OBS !!!!!!!!!!!!!!!
+        //Dependendo do usuario e da acao ele nao deve ir para o banco de dados depois 
+        //do Login,criar conta ou modificar conta
+        
+        //String previousPage = request.getHeader("referer"); 
+        String previousPage = (String) request.getAttribute("javax.servlet.forward.request.url");
         
         RequestDispatcher view = request.getRequestDispatcher(LIST_USUARIO);
+        //RequestDispatcher view = request.getRequestDispatcher(previousPage);
         request.setAttribute("UsuarioDAO", dao.getUsuarios());
         view.forward(request, response);
         
