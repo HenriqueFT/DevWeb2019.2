@@ -1,3 +1,11 @@
+body{
+    position: relative;
+}
+
+.navbar{
+    margin-bottom: 30px;
+}
+
 .navbar-right {
     float: right !important;
     margin-right: -15px;
@@ -5,4 +13,45 @@
 
 .navbar-header {
     float: left;
+}
+
+.exibeProdutos{
+}
+
+.tabelasBanco{
+    padding-top: 110px;
+}
+
+.tableList{
+    max-width:500px;
+}
+
+th{
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 1px; 
+    border-style: solid;
+}
+
+.topBody{
+    position: relative;
+}
+
+.options{
+   position: absolute;
+   top: 64px;
+}
+
+.midBody{
+    position: absolute;
+    top:68px;
+}
+
+.btn-thin{
+    padding: 2px;
+}
+
+.btn-insert{
+    margin-bottom:7px;
 }

@@ -41,11 +41,21 @@ public class ProdutoController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forward = "";
         String action = "ListaProdutos";
+        String show = "Produtos";
         try {
             action = request.getParameter("action");
         } catch(Exception e){
             action = "ListaProdutos";
         }
+        
+        try {
+            show = request.getParameter("show");
+        } catch(Exception e){
+            show = "Produtos";
+        }
+        
+        request.setAttribute("show", show);
+        
             
         if (action == null){   
             forward = LIST_PRODUTOS;
