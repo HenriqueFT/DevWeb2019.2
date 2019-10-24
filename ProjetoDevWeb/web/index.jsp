@@ -22,6 +22,7 @@
     </head>
 
     <body>
+<<<<<<< HEAD
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top my-nav">
             <div class="container-fluid">
                 <div class="navbar-header"> 
@@ -61,6 +62,43 @@
                             <th>Preço</th>
                         </tr>
                     </thead> --->
+=======
+        <h1>Loja</h1>
+        <%
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            List<Produto> produtos = produtoDAO.getProdutos();
+            Iterator<Produto> iProdutos = produtos.iterator();
+        %>
+        <table>
+            <!--- <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descricao</th>
+                    <th>Preço</th>
+                </tr>
+            </thead> --->
+        <%
+            while (iProdutos.hasNext()) {
+                Produto produto = iProdutos.next();
+        %>
+            <tbody>
+            <%
+                out.println("<tr>");
+                out.println("<td style='min-width:50px'><img src='" + produto.getImagem() + "' width='40' height='60'></td>");
+                out.println("<td style='min-width:150px'><a href='paginaProduto.jsp?id=" + produto.getId() + "'>" + produto.getNome() + "</a></td>");
+                out.println("<td style='min-width:250px'>" + produto.getDescricao() + "</td>");
+                out.println("<td style='min-width:50px'>R$" + produto.getPreco() + "</td>");
+                out.println("<td style='min-width:100px'><a href='paginaCarrinho.jsp?id=" + produto.getId() + "'>Adicionar ao carrinho</a></td>");
+                out.println("</tr>");
+            %>
+            <tbody>
+                <%out.println("<tr>");
+                    out.println("<td>" + produto.getNome() + "</td>");
+                    out.println("<td>" + produto.getDescricao() + "</td>");
+                    out.println("<td>" + produto.getPreco() + "</td>");
+            out.println("</tr>");%>
+
+>>>>>>> feature/carrinho
                 <%
                     while (iProdutos.hasNext()) {
                         Produto produto = iProdutos.next();

@@ -79,8 +79,11 @@ public class UsuarioDAO {
             preparedStatement.setInt(2, usu.getCpf());
             preparedStatement.setInt(3, usu.getIsAdm());
             preparedStatement.setString(4, usu.getCidade());
+<<<<<<< HEAD
             preparedStatement.setString(5, usu.getEndereco());
             preparedStatement.setInt(6, usu.getnFuncionario());             
+=======
+>>>>>>> feature/carrinho
             preparedStatement.executeUpdate();
             
             
@@ -103,7 +106,11 @@ public class UsuarioDAO {
         }
     }
     
+<<<<<<< HEAD
     public void updateUsuario(Usuario usu) {
+=======
+    public void updateUsuario(Produto usu) {
+>>>>>>> feature/carrinho
         try {
             Connection conn=Database.getConnection();
             PreparedStatement preparedStatement = conn.prepareStatement("update produto set Nome=?, CPF=?, IsADM=?, Cidade=?, Endereco=?, NFUncionario=?"
