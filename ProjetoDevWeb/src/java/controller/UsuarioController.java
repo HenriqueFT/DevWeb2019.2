@@ -31,7 +31,8 @@ import java.security.NoSuchAlgorithmException;
 public class UsuarioController extends HttpServlet {
     //ID Nom//ID Nome CPF isADM Cidade Endereco NFUncionarioe CPF isADM Cidade Endereco NFUncionario
     private static String INSERT = "/paginaLoginOuCadastro.jsp";
-    private static String UPDATE = "/xxxUpdateForm.jsp";            //<-- Essas3 ainda nao estao corretas
+    private static String UPDATE = "/paginaLoginOuCadastro.jsp";            //<-- Essas3 ainda nao estao corretas
+    private static String LOGIN = "/paginaLoginOuCadastro.jsp";   
     private static String LIST_USUARIO = "/bancoDeDados.jsp";
     private UsuarioDAO dao;
     
@@ -41,7 +42,7 @@ public class UsuarioController extends HttpServlet {
     private static String ISADM="isADM";
     private static String CIDADE="cidade";
     private static String ENDERECO="endereco";
-    private static String NFUNCIONARIOS="nfuncionarios";
+    //private static String NFUNCIONARIOS="nfuncionarios";
            
     
     public UsuarioController() {
@@ -52,11 +53,28 @@ public class UsuarioController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forward = "";
         String action = "ListaUsuarios";
+        String show = "Usuarios";
+        
         try {
             action = request.getParameter("action");
         } catch(Exception e){
-            action = "ListaUsuarios";
+            action = "ListaProdutos";
         }
+        
+        try {
+            show = request.getParameter("show");
+        } catch(Exception e){
+            show = "Produtos";
+        }
+        
+        String s ="";
+    
+        if(request.getSession().getAttribute("action") != null){
+            s = (String) request.getSession().getAttribute("action");
+        }
+        
+        request.setAttribute("show", show);
+        
             
         if (action == null){   
             forward = LIST_USUARIO;
@@ -82,7 +100,7 @@ public class UsuarioController extends HttpServlet {
             forward = LIST_USUARIO;
             request.setAttribute("UsuarioDAO", dao.getUsuarios());    
         }  else {
-            forward = INSERT;
+            forward = LIST_USUARIO;
         }
  
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -92,19 +110,23 @@ public class UsuarioController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Usuario usuario = new Usuario();
+        System.out.println("Parametro ID :"+request.getParameter("id"));
                
         String s ="";
         
         if(request.getSession().getAttribute("action") != null){
             s = (String) request.getSession().getAttribute("action");
         }
-         
+        
+        System.out.println("ACTION : "+s);
+        
         int id = 0;
 
         //ID Nome CPF isADM Cidade Endereco NFUncionario
         if(s.equals("update") || s.equals("login")){
             try {
                 id = Integer.parseInt(request.getParameter("id"));
+                System.out.println("O id deveria ter valor "+id);
             } catch(Exception e){
                 e.printStackTrace();
                 id = -1;
@@ -115,22 +137,27 @@ public class UsuarioController extends HttpServlet {
                 
         usuario.setUserId(id);
         usuario.setNome(request.getParameter(NOME));
-        usuario.setCpf(Integer.parseInt(request.getParameter(CPF)));
+        usuario.setCpf(request.getParameter(CPF));
         usuario.setIsAdm(Integer.parseInt(request.getParameter(ISADM)));
-       usuario.setCidade(request.getParameter(CIDADE));
+        usuario.setCidade(request.getParameter(CIDADE));
         usuario.setEndereco(request.getParameter(ENDERECO));
         
         String senha = request.getParameter(SENHA);
-        String senhaEncriptada="";
+        String senhaEncriptada="SENHA1234";
+        
         try {
             //ID Nome CPF isADM Cidade Endereco NFUncionario
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             md.update(senha.getBytes());
             senhaEncriptada = new String(md.digest());
         } catch (NoSuchAlgorithmException ex) {
+            System.out.println("Houve problema com o SHA");
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
-           
+        
+        usuario.setSenha(senhaEncriptada);
+        
+        
         //usuario.setSenha(senhaEncriptada);
         
         //--------------------Fazer checagem se eh adm depois------------------ 
@@ -151,6 +178,7 @@ public class UsuarioController extends HttpServlet {
              dao.addProduto(produto);
             }
         */
+        
         dao.addUsuario(usuario);//Por enquanto nao tem protecao de quem faz isso
         if(s.equals("login")){
             
@@ -164,9 +192,9 @@ public class UsuarioController extends HttpServlet {
         //----------------------------------- OBS !!!!!!!!!!!!!!!
         //Dependendo do usuario e da acao ele nao deve ir para o banco de dados depois 
         //do Login,criar conta ou modificar conta
-        
-        //String previousPage = request.getHeader("referer"); 
-        String previousPage = (String) request.getAttribute("javax.servlet.forward.request.url");
+        String previousPage="";
+        previousPage = request.getHeader("referer"); 
+        previousPage = (String) request.getAttribute("javax.servlet.forward.request.url");
         
         RequestDispatcher view = request.getRequestDispatcher(LIST_USUARIO);
         //RequestDispatcher view = request.getRequestDispatcher(previousPage);

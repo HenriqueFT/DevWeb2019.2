@@ -47,7 +47,7 @@
                 <a href="ProdutoController?show=Produtos">
                     <button type="button" class="btn btn-secondary">Produtos</button>
                 </a>
-                <a href="ProdutoController?show=Usuarios">
+                <a href="UsuarioController?show=Usuarios">
                     <button type="button" class="btn btn-secondary">Usuarios</button>
                 </a>
             </div>
@@ -75,17 +75,23 @@
             <table class='tableList'>
                 <thead>
                     <tr>
+                        <th>Id</th>
                         <th>Nome</th>
                         <th>Descricao</th>
                         <th>Preço</th>
+                        <th>Imagem</th>
+                        <th>Estoque</th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach items="${ProdutoDAO}" var="produto">
                         <tr>
+                            <th><c:out value="${produto.id}" /></th>
                             <th><c:out value="${produto.nome}" /></th>
                             <th><c:out value="${produto.descricao}" /></th>
                             <th><c:out value="${produto.preco}" /></th>
+                            <th><c:out value="${produto.imagem}" /></th>    <!--PQ BRANCO   ??-->
+                            <th><c:out value="${produto.estoque}" /></th>   <!--PQ TA TUDO 0??-->
                             <!--TEM QUE  ATUALIZAR AQUI PARA VER O ID PRA VERSE EH ADM,olhando a sessao-->
                             <th><a href="ProdutoController?action=update&id=<c:out value="${produto.id}"/>">Update</a></th>
                             <th><a href="ProdutoController?action=delete&id=<c:out value="${produto.id}"/>">Delete</a></th>
@@ -97,14 +103,51 @@
         <%
         }else if(show.equalsIgnoreCase("Usuarios")){
         %>
-            <div class="tabelasBanco container-fluid">
-                <h1>Exibe Usuario ainda nao implementado</h1>
-            </div>
+        
+        <!-- UserID Nome Senha CPF isADM Cidade Endereco -->
+        
+        <div class="tabelasBanco container-fluid">
+            <a href="UsuarioController?action=insert&id=0">
+                  <button type="button" class="btn btn-warning btn-thin btn-insert">Inserir Usuario</button>
+            </a><br>
+            <table class='tableList'>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Senha</th>
+                        <th>CPF</th>
+                        <th>isADM</th>
+                        <th>Cidade</th>
+                        <th>Endereco</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${UsuarioDAO}" var="usuario">
+                        <tr>
+                            <th><c:out value="${usuario.userId}" /></th>
+                            <th><c:out value="${usuario.nome}" /></th>
+                            <th><c:out value="${usuario.senha}" /></th>
+                            <th><c:out value="${usuario.cpf}" /></th>
+                            <th><c:out value="${usuario.isAdm}" /></th>
+                            <th><c:out value="${usuario.cidade}" /></th>
+                            <th><c:out value="${usuario.endereco}" /></th>
+                            <!--TEM QUE  ATUALIZAR AQUI PARA VER O ID PRA VERSE EH ADM,olhando a sessao-->
+                            <th><a href="UsuarioController?action=update&id=<c:out value="${usuario.userId}"/>">Update</a></th>
+                            <th><a href="UsuarioController?action=delete&id=<c:out value="${usuario.userId}"/>">Delete</a></th>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
         <%
         }else{
-            System.out.println("ERRO: Show possuia algo nao implementado");
+            System.out.println("ERRO: Show possuia algo nao implementado"); 
+            System.out.println("Show tinha: " + show);
         }
         %>
+
+        
         <script src="style/jquery-3.4.1.min.js"></script>
         <script src="style/bootstrap/js/bootstrap.min.js"></script>
     </body>

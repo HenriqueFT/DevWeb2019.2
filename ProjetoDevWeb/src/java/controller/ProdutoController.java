@@ -42,21 +42,14 @@ public class ProdutoController extends HttpServlet {
         String forward = "";
         String action = "ListaProdutos";
         String show = "Produtos";
+        
         try {
             action = request.getParameter("action");
         } catch(Exception e){
             action = "ListaProdutos";
         }
-        
-        try {
-            show = request.getParameter("show");
-        } catch(Exception e){
-            show = "Produtos";
-        }
-        
-        request.setAttribute("show", show);
-        
-            
+
+         
         if (action == null){   
             forward = LIST_PRODUTOS;
             request.setAttribute("ProdutoDAO", dao.getProdutos());
@@ -64,13 +57,14 @@ public class ProdutoController extends HttpServlet {
             forward = INSERT;
             int id = Integer.parseInt(request.getParameter("id"));
             Produto produto = dao.getProduto(id); 
+ 
+            
             request.setAttribute("action", "insert");
             request.setAttribute("produto", produto);
         }else if (action.equalsIgnoreCase("listaProdutos")){
             forward = LIST_PRODUTOS;
             request.setAttribute("ProdutoDAO", dao.getProdutos());
         } else if (action.equalsIgnoreCase("update")){
-            System.out.println("UPDATE");
             forward = UPDATE;
             int id = Integer.parseInt(request.getParameter("id"));
             Produto produto = dao.getProduto(id);
@@ -92,6 +86,8 @@ public class ProdutoController extends HttpServlet {
      protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Produto produto = new Produto();
         System.out.println("Parametro ID :"+request.getParameter("id"));
+        
+        System.out.println("-------Vamos ver se funciona-------: "+request.getAttribute("teste"));
          
         String s ="";
         if(request.getSession().getAttribute("action") != null){

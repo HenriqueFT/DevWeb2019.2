@@ -15,7 +15,8 @@ public class Usuario {
     
     private int userId;
     private String nome;
-    private int cpf;
+    private String senha;
+    private String cpf;
     private int isAdm;
     private String cidade;
     private String endereco;
@@ -30,11 +31,11 @@ public class Usuario {
         this.userId = userId;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
     
@@ -92,6 +93,14 @@ public class Usuario {
     public static boolean isADM(Usuario usuario){
         
         return true;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    
+    public String getSenha(){
+        return this.senha;
     }
     
 }

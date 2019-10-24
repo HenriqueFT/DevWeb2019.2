@@ -27,12 +27,13 @@ public class UsuarioDAO {
             while(resp.next()){
                 Usuario usu= new Usuario();
                 usu.setNome(resp.getString("Nome"));
-                usu.setCpf(resp.getInt("CPF"));
+                usu.setSenha(resp.getString("Senha"));
+                usu.setCpf(resp.getString("CPF"));
                 usu.setIsAdm(resp.getInt("IsADM"));
                 usu.setUserId(resp.getInt("UserID"));
                 usu.setCidade(resp.getString("Cidade"));
                 usu.setEndereco(resp.getString("Endereco"));
-                usu.setnFuncionario(resp.getInt("NFuncionario"));
+                //usu.setnFuncionario(resp.getInt("NFuncionario"));
                 usuarios.add(usu);
                 
             }
@@ -56,12 +57,12 @@ public class UsuarioDAO {
             ResultSet resp = ps.executeQuery();
             if (resp.next()) {// found  
                 usu.setNome(resp.getString("Nome"));
-                usu.setCpf(resp.getInt("CPF"));
+                usu.setSenha(resp.getString("Senha"));
+                usu.setCpf(resp.getString("CPF"));
                 usu.setIsAdm(resp.getInt("IsADM"));
                 usu.setUserId(resp.getInt("UserID"));
                 usu.setCidade(resp.getString("Cidade"));
                 usu.setEndereco(resp.getString("Endereco"));
-                usu.setnFuncionario(resp.getInt("NFuncionario"));
             }
             conn.close();
         } catch (Exception ex) {
@@ -73,14 +74,15 @@ public class UsuarioDAO {
     public void addUsuario(Usuario usu) {
         try {
             Connection conn=Database.getConnection();
-            PreparedStatement preparedStatement = conn.prepareStatement("insert into produto(Nome, CPF, IsADM, Cidade, Endereco, NFuncionario) values (?, ?, ?, ?, ?, ?)");
+            PreparedStatement preparedStatement = conn.prepareStatement("insert into produto(Nome, Senha, CPF, IsADM, Cidade, Endereco) values (?, ?, ?, ?, ?, ?)");
             // Parameters start with 1
             preparedStatement.setString(1, usu.getNome());
-            preparedStatement.setInt(2, usu.getCpf());
-            preparedStatement.setInt(3, usu.getIsAdm());
-            preparedStatement.setString(4, usu.getCidade());
-            preparedStatement.setString(5, usu.getEndereco());
-            preparedStatement.setInt(6, usu.getnFuncionario());             
+            preparedStatement.setString(2, usu.getSenha());
+            preparedStatement.setString(3, usu.getCpf());
+            preparedStatement.setInt(4, usu.getIsAdm());
+            preparedStatement.setString(5, usu.getCidade());
+            preparedStatement.setString(6, usu.getEndereco());
+            //preparedStatement.setInt(6, usu.getnFuncionario());             
             preparedStatement.executeUpdate();
             
             
@@ -106,16 +108,16 @@ public class UsuarioDAO {
     public void updateUsuario(Usuario usu) {
         try {
             Connection conn=Database.getConnection();
-            PreparedStatement preparedStatement = conn.prepareStatement("update produto set Nome=?, CPF=?, IsADM=?, Cidade=?, Endereco=?, NFUncionario=?"
+            PreparedStatement preparedStatement = conn.prepareStatement("update produto set Nome=?, CPF=?, IsADM=?, Cidade=?, Endereco=?, Senha=?"
                     + " where UserID=?");
             //System.out.println(new java.sql.Date(user.getAcesso().getTime()));
           // Parameters start with 1
-             preparedStatement.setString(1, usu.getNome());
-            preparedStatement.setInt(2, usu.getCpf());
+            preparedStatement.setString(1, usu.getNome());
+            preparedStatement.setString(2, usu.getCpf());
             preparedStatement.setInt(3, usu.getIsAdm());
             preparedStatement.setString(4, usu.getCidade());
             preparedStatement.setString(5, usu.getEndereco());
-            preparedStatement.setInt(6, usu.getnFuncionario());           
+            preparedStatement.setString(6, usu.getSenha());           
             preparedStatement.setInt(7, usu.getUserId());  
             preparedStatement.executeUpdate();
             
