@@ -47,7 +47,6 @@ public class ProdutoController extends HttpServlet {
         } catch(Exception e){
             action = "ListaProdutos";
         }
-<<<<<<< HEAD
         
         try {
             show = request.getParameter("show");
@@ -57,8 +56,6 @@ public class ProdutoController extends HttpServlet {
         
         request.setAttribute("show", show);
         
-=======
->>>>>>> feature/carrinho
             
         if (action == null){   
             forward = LIST_PRODUTOS;

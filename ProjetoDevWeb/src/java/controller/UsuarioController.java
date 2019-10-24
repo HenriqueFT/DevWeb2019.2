@@ -16,15 +16,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-<<<<<<< HEAD
 import modelos.Usuario; 
 import modelos.Usuario;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-=======
-import modelos.Usuario;
-import DAO.UsuarioDAO;
->>>>>>> feature/carrinho
 
 //
 //------------------Todos os controllers com formato de CRUD podem ser assim,-----------------------
@@ -35,15 +30,9 @@ import DAO.UsuarioDAO;
 
 public class UsuarioController extends HttpServlet {
     //ID Nom//ID Nome CPF isADM Cidade Endereco NFUncionarioe CPF isADM Cidade Endereco NFUncionario
-<<<<<<< HEAD
     private static String INSERT = "/paginaLoginOuCadastro.jsp";
     private static String UPDATE = "/xxxUpdateForm.jsp";            //<-- Essas3 ainda nao estao corretas
     private static String LIST_USUARIO = "/bancoDeDados.jsp";
-=======
-    private static String INSERT = "/paginaInsert.jsp";
-    private static String UPDATE = "/xxxUpdateForm.jsp";
-    private static String LIST_USUARIO = "/index.jsp";
->>>>>>> feature/carrinho
     private UsuarioDAO dao;
     
     private static String NOME="nome";
@@ -113,7 +102,6 @@ public class UsuarioController extends HttpServlet {
         int id = 0;
 
         //ID Nome CPF isADM Cidade Endereco NFUncionario
-<<<<<<< HEAD
         if(s.equals("update") || s.equals("login")){
             try {
                 id = Integer.parseInt(request.getParameter("id"));
@@ -131,14 +119,6 @@ public class UsuarioController extends HttpServlet {
         usuario.setIsAdm(Integer.parseInt(request.getParameter(ISADM)));
        usuario.setCidade(request.getParameter(CIDADE));
         usuario.setEndereco(request.getParameter(ENDERECO));
-=======
-        //usuario.setId(id);
-        //usuario.setNome(request.getParameter(NOME));
-        //usuario.setCPF(Integer.parseInt(request.getParameter(CPF)));
-        //usuario.setAdmin(Integer.parseInt(request.getParameter(ISADM)));
-        usuario.setCidade(request.getParameter(CIDADE));
-        //usuario.setEndereco(Integer.parseInt(request.getParameter(ENDERECO)));
->>>>>>> feature/carrinho
         
         String senha = request.getParameter(SENHA);
         String senhaEncriptada="";
@@ -189,12 +169,8 @@ public class UsuarioController extends HttpServlet {
         String previousPage = (String) request.getAttribute("javax.servlet.forward.request.url");
         
         RequestDispatcher view = request.getRequestDispatcher(LIST_USUARIO);
-<<<<<<< HEAD
         //RequestDispatcher view = request.getRequestDispatcher(previousPage);
         request.setAttribute("UsuarioDAO", dao.getUsuarios());
-=======
-        //request.setAttribute("usuarioDAO", dao.getUsuario());
->>>>>>> feature/carrinho
         view.forward(request, response);
         
      }
