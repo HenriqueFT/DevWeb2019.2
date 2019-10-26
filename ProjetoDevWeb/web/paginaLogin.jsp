@@ -15,7 +15,8 @@
         <h3>Bem vindo de volta!</h3>
         <h4>Insira suas informações para acessar sua conta.</h4>
         
-        <form>
+        <form method="POST" action="UsuarioController" name="formLogin" id="loginForm">
+            
             <p>CPF:
             <input type="text" name="cpf" maxlength="11" minlength="11" required>
             </p>
@@ -25,7 +26,7 @@
             <input type="submit" value="Entrar">
         </form>
         
-        <h4>Não possui uma conta ainda? <a href="paginaCadastro.jsp">Cadastre-se!</a>
+        <h4>Não possui uma conta ainda? <a href="UsuarioController?action=insert">Cadastre-se!</a>
         
     </body>
 </html>

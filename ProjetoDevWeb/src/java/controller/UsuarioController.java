@@ -30,7 +30,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class UsuarioController extends HttpServlet {
     //ID Nom//ID Nome CPF isADM Cidade Endereco NFUncionarioe CPF isADM Cidade Endereco NFUncionario
-    private static String INSERT = "/paginaLoginOuCadastro.jsp";
+    private static String INSERT = "/paginaCadastro.jsp";
     private static String UPDATE = "/xxxUpdateForm.jsp";            //<-- Essas3 ainda nao estao corretas
     private static String LIST_USUARIO = "/bancoDeDados.jsp";
     private UsuarioDAO dao;
