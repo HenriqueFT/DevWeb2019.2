@@ -72,41 +72,17 @@ CREATE TABLE `favoritos` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `frete`
---
-
-CREATE TABLE `frete` (
-  `Cidade` varchar(50) NOT NULL,
-  `Valor` decimal(4,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `produto`
 --
 
 CREATE TABLE `produto` (
   `idProduto` int(11) NOT NULL,
-  `Nome` varchar(50) NOT NULL,
+  `Nome` varchar(500) NOT NULL,
   `Preco` decimal(4,2) NOT NULL,
-  `Descricao` varchar(100) DEFAULT NULL,
-  `Imagem` varchar(50) DEFAULT NULL,
+  `Descricao` varchar(2000) DEFAULT NULL,
+  `Imagem` varchar(100) DEFAULT NULL,
   `Estoque` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `produto`
---
-
-INSERT INTO `produto` (`idProduto`, `Nome`, `Preco`, `Descricao`, `Imagem`, `Estoque`) VALUES
-(1, 'E o vento levou', '10.00', 'filme muito top', NULL, NULL),
-(2, 'Im here... now', '2.00', 'filme um pouco menos top', NULL, 0),
-(3, 'hellraiser', '7.00', 'um filme meio bunda', NULL, NULL),
-(4, 'Fateful Findings', '2.00', 'filme um pouco menos top', NULL, 0),
-(5, 'Fateful Findings', '2.00', 'filme um pouco menos top', NULL, 0);
-
--- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `usuario`
@@ -114,12 +90,12 @@ INSERT INTO `produto` (`idProduto`, `Nome`, `Preco`, `Descricao`, `Imagem`, `Est
 
 CREATE TABLE `usuario` (
   `UserID` int(11) NOT NULL,
-  `Nome` varchar(50) NOT NULL,
+  `Nome` varchar(500) NOT NULL,
+  `Email` varchar(50) NOT NULL,
+  `Senha` varchar(20) NOT NULL,
   `CPF` int(11) NOT NULL,
   `IsADM` tinyint(4) NOT NULL,
-  `Cidade` varchar(50) DEFAULT NULL,
-  `Endereco` varchar(50) NOT NULL,
-  `NFuncionario` int(11) NOT NULL
+  `Endereco` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -149,11 +125,6 @@ ALTER TABLE `favoritos`
   ADD KEY `Produto_idx` (`idProduto`),
   ADD KEY `Usuario_idx` (`UserID`);
 
---
--- Índices para tabela `frete`
---
-ALTER TABLE `frete`
-  ADD PRIMARY KEY (`Cidade`);
 
 --
 -- Índices para tabela `produto`
@@ -167,8 +138,8 @@ ALTER TABLE `produto`
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`UserID`),
   ADD UNIQUE KEY `CPF_UNIQUE` (`CPF`),
-  ADD UNIQUE KEY `NFuncionario_UNIQUE` (`NFuncionario`),
-  ADD KEY `Cidade_idx` (`Cidade`);
+  ADD UNIQUE KEY `EMAIL` (`Email`);
+
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
@@ -212,9 +183,7 @@ ALTER TABLE `favoritos`
 
 --
 -- Limitadores para a tabela `usuario`
---
-ALTER TABLE `usuario`
-  ADD CONSTRAINT `Cidade` FOREIGN KEY (`Cidade`) REFERENCES `frete` (`Cidade`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

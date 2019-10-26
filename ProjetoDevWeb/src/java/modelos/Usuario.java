@@ -15,6 +15,8 @@ public class Usuario {
     
     private int userId;
     private String nome;
+    private String email;
+    private String senha;
     private int cpf;
     private int isAdm;
     private String cidade;
@@ -33,6 +35,23 @@ public class Usuario {
     public int getCpf() {
         return cpf;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    
 
     public void setCpf(int cpf) {
         this.cpf = cpf;

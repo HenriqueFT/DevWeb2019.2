@@ -32,6 +32,8 @@ public class UsuarioDAO {
                 usu.setUserId(resp.getInt("UserID"));
                 usu.setCidade(resp.getString("Cidade"));
                 usu.setEndereco(resp.getString("Endereco"));
+                usu.setEmail(resp.getString("Email"));
+                usu.setSenha(resp.getString("Senha"));
                 usu.setnFuncionario(resp.getInt("NFuncionario"));
                 usuarios.add(usu);
                 
@@ -60,6 +62,8 @@ public class UsuarioDAO {
                 usu.setIsAdm(resp.getInt("IsADM"));
                 usu.setUserId(resp.getInt("UserID"));
                 usu.setCidade(resp.getString("Cidade"));
+                usu.setEmail(resp.getString("Email"));
+                usu.setSenha(resp.getString("Senha"));
                 usu.setEndereco(resp.getString("Endereco"));
                 usu.setnFuncionario(resp.getInt("NFuncionario"));
             }
@@ -73,14 +77,16 @@ public class UsuarioDAO {
     public void addUsuario(Usuario usu) {
         try {
             Connection conn=Database.getConnection();
-            PreparedStatement preparedStatement = conn.prepareStatement("insert into produto(Nome, CPF, IsADM, Cidade, Endereco, NFuncionario) values (?, ?, ?, ?, ?, ?)");
+            PreparedStatement preparedStatement = conn.prepareStatement("insert into usuario (Nome, Email, Senha, CPF, IsADM, Cidade, Endereco, NFuncionario) values (?, ?, ?, ?, ?, ?, ?, ?)");
             // Parameters start with 1
             preparedStatement.setString(1, usu.getNome());
-            preparedStatement.setInt(2, usu.getCpf());
-            preparedStatement.setInt(3, usu.getIsAdm());
-            preparedStatement.setString(4, usu.getCidade());
-            preparedStatement.setString(5, usu.getEndereco());
-            preparedStatement.setInt(6, usu.getnFuncionario());             
+            preparedStatement.setString(2, usu.getEmail());
+            preparedStatement.setString(3, usu.getSenha());
+            preparedStatement.setInt(4, usu.getCpf());
+            preparedStatement.setInt(5, usu.getIsAdm());
+            preparedStatement.setString(6, usu.getCidade());
+            preparedStatement.setString(7, usu.getEndereco());
+            preparedStatement.setInt(8, usu.getnFuncionario());             
             preparedStatement.executeUpdate();
             
             
@@ -106,17 +112,19 @@ public class UsuarioDAO {
     public void updateUsuario(Usuario usu) {
         try {
             Connection conn=Database.getConnection();
-            PreparedStatement preparedStatement = conn.prepareStatement("update produto set Nome=?, CPF=?, IsADM=?, Cidade=?, Endereco=?, NFUncionario=?"
+            PreparedStatement preparedStatement = conn.prepareStatement("update usuario set Nome=?, Email=?, Senha=?, CPF=?, IsADM=?, Cidade=?, Endereco=?, NFUncionario=?"
                     + " where UserID=?");
             //System.out.println(new java.sql.Date(user.getAcesso().getTime()));
           // Parameters start with 1
              preparedStatement.setString(1, usu.getNome());
-            preparedStatement.setInt(2, usu.getCpf());
-            preparedStatement.setInt(3, usu.getIsAdm());
-            preparedStatement.setString(4, usu.getCidade());
-            preparedStatement.setString(5, usu.getEndereco());
-            preparedStatement.setInt(6, usu.getnFuncionario());           
-            preparedStatement.setInt(7, usu.getUserId());  
+             preparedStatement.setString(2, usu.getEmail());
+            preparedStatement.setString(3, usu.getSenha());
+            preparedStatement.setInt(4, usu.getCpf());
+            preparedStatement.setInt(5, usu.getIsAdm());
+            preparedStatement.setString(6, usu.getCidade());
+            preparedStatement.setString(7, usu.getEndereco());
+            preparedStatement.setInt(8, usu.getnFuncionario());           
+            preparedStatement.setInt(9, usu.getUserId());  
             preparedStatement.executeUpdate();
             
             
