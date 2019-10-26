@@ -37,7 +37,7 @@
                     <div class="collapse navbar-collapse ">
                         <div class="navbar-nav">
                             <a href="ProdutoController?show=Produtos" data-toggle="tooltip" title="Banco de Dados"><span class="nav-item nav-link fas fa-database" ></span></a>
-                            <a href="#" data-toggle="tooltip" title="Login"><span class="nav-item nav-link fas fa-door-open"></span></a>
+                            <a href="paginaLogin.jsp" data-toggle="tooltip" title="Login"><span class="nav-item nav-link fas fa-door-open"></span></a>
                             <a href="#" data-toggle="tooltip" title="Perfil"><span class="nav-item nav-link fas fa-user"></span></a>
                             <a href="#" data-toggle="tooltip" title="Carrinho"><span class="nav-item nav-link fas fa-shopping-cart"></span></a>
                         </div>                   
