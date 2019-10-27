@@ -68,6 +68,11 @@
                 </tr>
             </tfoot>
         </table>
+
+        <br>
+        <a href='index.jsp'> Continuar comprando </a>
+        <br>
+        <a href='index.jsp'> Fechar compra </a>
     </body>
 </html>
 

@@ -3,6 +3,7 @@
     Created on : 08/10/2019, 19:07:11
     Author     : Usuario
 --%>
+<%@page import="util.FormataPreco"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="DAO.ProdutoDAO"%>
@@ -71,7 +72,7 @@
                         out.println("<td style='min-width:50px'><img src='img/" + produto.getImagem() + "' width='40' height='60'></td>");
                         out.println("<td style='min-width:150px'><a href='paginaProduto.jsp?id=" + produto.getId() + "'>" + produto.getNome() + "</a></td>");
                         out.println("<td style='min-width:250px'>" + produto.getDescricao() + "</td>");
-                        out.println("<td style='min-width:50px'>R$" + produto.getPreco() + "</td>");
+                        out.println("<td style='min-width:50px'>" + FormataPreco.formata((int) produto.getPreco()) + "</td>");
                         out.println("<td style='min-width:100px'><a href='paginaCarrinho.jsp?id="+produto.getId() + "'>Adicionar ao carrinho</a></td>");
                         out.println("</tr>");
                     %>
