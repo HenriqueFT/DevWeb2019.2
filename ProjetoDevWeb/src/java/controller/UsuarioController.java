@@ -115,8 +115,9 @@ public class UsuarioController extends HttpServlet {
                 
         usuario.setUserId(id);
         usuario.setNome(request.getParameter(NOME));
-        usuario.setCpf(Integer.parseInt(request.getParameter(CPF)));
-        usuario.setIsAdm(Integer.parseInt(request.getParameter(ISADM)));
+        usuario.setCpf(request.getParameter(CPF));
+        // usuario.setIsAdm(Integer.parseInt(request.getParameter(ISADM)));
+        usuario.setIsAdm(0);
        usuario.setCidade(request.getParameter(CIDADE));
         usuario.setEndereco(request.getParameter(ENDERECO));
         

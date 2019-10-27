@@ -15,7 +15,7 @@ public class Usuario {
     
     private int userId;
     private String nome;
-    private int cpf;
+    private String cpf;
     private int isAdm;
     private String cidade;
     private String endereco;
@@ -30,11 +30,11 @@ public class Usuario {
         this.userId = userId;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
     
