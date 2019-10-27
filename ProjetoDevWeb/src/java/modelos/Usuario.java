@@ -17,11 +17,9 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
-    private int cpf;
+    private String cpf;
     private int isAdm;
-    private String cidade;
     private String endereco;
-    private int nFuncionario;
     private ArrayList<Produto> favoritos;
 
     public int getUserId() {
@@ -32,7 +30,7 @@ public class Usuario {
         this.userId = userId;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
@@ -53,7 +51,7 @@ public class Usuario {
     }
     
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
     
@@ -74,28 +72,12 @@ public class Usuario {
         this.isAdm = isAdm;
     }
 
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
     public String getEndereco() {
         return endereco;
     }
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
-    }
-
-    public int getnFuncionario() {
-        return nFuncionario;
-    }
-
-    public void setnFuncionario(int nFuncionario) {
-        this.nFuncionario = nFuncionario;
     }
 
     public ArrayList<Produto> getFavoritos() {
