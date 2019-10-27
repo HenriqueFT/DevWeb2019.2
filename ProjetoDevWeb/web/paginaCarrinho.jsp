@@ -1,6 +1,7 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Iterator"%>
 
+<%@page import="util.FormataPreco"%>
 <%@page import="modelos.Carrinho"%>
 <%@page import="DAO.CarrinhoDAO"%>
 <%@page import="modelos.Produto"%>
@@ -11,11 +12,18 @@
 <%@include file="include/checkCookieCarrinho.jsp" %>
 
 <%
-    CarrinhoDAO carrinhoDAO = new CarrinhoDAO();
-    Carrinho carrinho = carrinhoDAO.getCarrinho(idCarrinho, true);
+    CarrinhoDAO carrinhoDAO = new CarrinhoDAO(idCarrinho);
+    Carrinho carrinho = carrinhoDAO.getCarrinho(true);
 
-    carrinho.adicionarAoCarrinho(Integer.parseInt(request.getParameter("id")), 1);
-    carrinhoDAO.updateCarrinho(carrinho);
+    if (request.getParameter("id") != null) {
+        if (request.getParameter("r") != null) {
+            carrinho.removeDoCarrinho(Integer.parseInt(request.getParameter("id")));
+            carrinhoDAO.removeDoCarrinho(Integer.parseInt(request.getParameter("id")));
+        } else {
+            carrinho.adicionarAoCarrinho(Integer.parseInt(request.getParameter("id")), 1);
+            carrinhoDAO.updateCarrinho(carrinho);
+        }
+    }
 %>
 
 <!DOCTYPE html>
@@ -25,7 +33,6 @@
     </head>
 
     <body>
-        <h1> <% out.println(idCarrinho); %> </h1>
         <table>
             <thead>
                 <tr>
@@ -45,14 +52,21 @@
                         Produto produto = produtoDAO.getProduto((Integer) pair.getKey());
                 %>
                         <tr>
-                            <% out.println("<td>" + produto.getNome() + "</td>"); %>
-                            <% out.println("<td>" + pair.getValue() + "</td>"); %>
-                            <% out.println("<td>" + produto.getPreco() + "</td>"); %>
+                            <td> <% out.println(produto.getNome()); %> </td>
+                            <td> <% out.println(pair.getValue()); %> <a href='paginaCarrinho.jsp?id=<% out.println(produto.getId()); %>&r=1'> Remover</a> </td>
+                            <td> <% out.println(FormataPreco.formata((float) produto.getPreco())); %> </td>
                         </tr>
                 <%
                     }
                 %>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td>Total:</td>
+                    <td></td>
+                    <td><% out.println(FormataPreco.formata(carrinho.getPrecoTotal())); %></td>
+                </tr>
+            </tfoot>
         </table>
     </body>
 </html>

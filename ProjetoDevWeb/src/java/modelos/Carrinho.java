@@ -41,6 +41,10 @@ public class Carrinho {
         }
     }
     
+    public void removeDoCarrinho(int idProduto) {
+        this.carrinho.remove(idProduto);
+    }
+
     public int getQtdItens() {
         int qtd = 0;
         
@@ -48,5 +52,20 @@ public class Carrinho {
         qtd = this.carrinho.entrySet().stream().map((entry) -> entry.getValue()).reduce(qtd, Integer::sum);
         
         return qtd;
+    }
+
+    public float getPrecoTotal() {
+        float preco = 0;
+
+        Iterator it = this.carrinho.entrySet().iterator();
+
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        while (it.hasNext()) {
+            HashMap.Entry pair = (HashMap.Entry)it.next();
+
+            preco += produtoDAO.getProduto((Integer) pair.getKey()).getPreco() * ((Integer) pair.getValue());
+        }
+
+        return preco;
     }
 }

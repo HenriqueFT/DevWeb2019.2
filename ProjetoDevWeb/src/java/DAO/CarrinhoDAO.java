@@ -7,6 +7,11 @@ import java.util.Iterator;
 import modelos.Carrinho;
 
 public class CarrinhoDAO {
+    private final int id;
+
+    public CarrinhoDAO(int id) {
+        this.id = id;
+    }
     
     public Carrinho addCarrinho(int idCarrinho, Carrinho carrinho) {
         // TODO: Checar se já existe esse id
@@ -34,14 +39,14 @@ public class CarrinhoDAO {
         return null;
     }
         
-    public Carrinho getCarrinho(int id, boolean criarSeInexistente) {
-        Carrinho carrinho = new Carrinho(id);
+    public Carrinho getCarrinho(boolean criarSeInexistente) {
+        Carrinho carrinho = new Carrinho(this.id);
         int counter = 0;
         
         try {
             Connection conn = Database.getConnection();
             PreparedStatement ps = conn.prepareStatement("select * from carrinho where idCarrinho=?");
-            ps.setInt(1, id);
+            ps.setInt(1, this.id);
             ResultSet resp = ps.executeQuery();
             
             ProdutoDAO produtoDAO = new ProdutoDAO();
@@ -57,7 +62,7 @@ public class CarrinhoDAO {
         
         if (counter == 0) {
             if (criarSeInexistente) {
-                this.addCarrinho(id, carrinho);
+                this.addCarrinho(this.id, carrinho);
             } else {
                 return null;
             }
@@ -66,6 +71,19 @@ public class CarrinhoDAO {
         return carrinho;
     }
     
+    public void removeDoCarrinho(int idProduto) {
+        try {
+            Connection conn=Database.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement("delete from carrinho where idCarrinho=? and idProduto=?");
+            preparedStatement.setInt(1, this.id);
+            preparedStatement.setInt(2, idProduto);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void deleteCarrinho(int id) {
         try {
             Connection conn=Database.getConnection();
