@@ -73,7 +73,6 @@ public class UsuarioDAO {
     public void addUsuario(Usuario usu) {
         try {
             Connection conn=Database.getConnection();
-<<<<<<< HEAD
             PreparedStatement preparedStatement = conn.prepareStatement("insert into usuario (Nome, Email, Senha, CPF, IsADM, Endereco) values (?, ?, ?, ?, ?, ?)");
             // Parameters start with 1
             preparedStatement.setString(1, usu.getNome());
@@ -111,7 +110,6 @@ public class UsuarioDAO {
             //System.out.println(new java.sql.Date(user.getAcesso().getTime()));
           // Parameters start with 1
              preparedStatement.setString(1, usu.getNome());
-<<<<<<< HEAD
              preparedStatement.setString(2, usu.getEmail());
             preparedStatement.setString(3, usu.getSenha());
             preparedStatement.setString(4, usu.getCpf());
