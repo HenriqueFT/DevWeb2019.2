@@ -42,6 +42,7 @@ public class ProdutoController extends HttpServlet {
         String forward = "";
         String action = "ListaProdutos";
         String show = "Produtos";
+        
         try {
             action = request.getParameter("action");
         } catch(Exception e){

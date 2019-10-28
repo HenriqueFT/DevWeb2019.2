@@ -9,6 +9,9 @@ import java.util.List;
 import modelos.Produto;
 import java.sql.*;
 import codigo.Database;
+import controller.UsuarioController;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelos.Usuario;
@@ -125,4 +128,33 @@ public class UsuarioDAO {
         }
     }
     
+    //SELECT * FROM `usuario` WHERE `email`="asdf@gmail.com" AND`senha`=1234;
+    public Usuario loginUsuario(String email,String senha) {
+        Usuario usu= new Usuario();
+        try {
+            Connection conn=Database.getConnection();
+            //a senha jachega encriptada nessa parte
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `usuario` WHERE `email`=? AND`senha`=?;");
+            ps.setString(1, email);
+            ps.setString(2, senha);
+            
+            ResultSet resp = ps.executeQuery();
+            if (resp.next()) {// found  
+                usu.setNome(resp.getString("Nome"));
+                usu.setCpf(resp.getString("CPF"));
+                usu.setIsAdm(resp.getInt("IsADM"));
+                usu.setUserId(resp.getInt("UserID"));
+                usu.setEmail(resp.getString("Email"));
+                usu.setSenha(resp.getString("Senha"));
+                usu.setEndereco(resp.getString("Endereco"));
+            }
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println("Error in check() -->" + ex.getMessage());
+        } 
+        
+        return usu;
+    }
+    
+
 }

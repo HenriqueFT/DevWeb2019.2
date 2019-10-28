@@ -107,7 +107,7 @@ CREATE TABLE `usuario` (
   `UserID` int(11) NOT NULL,
   `Nome` varchar(500) NOT NULL,
   `Email` varchar(50) NOT NULL,
-  `Senha` varchar(20) NOT NULL,
+  `Senha` varchar(200) NOT NULL,
   `CPF` varchar(11) NOT NULL,
   `IsADM` tinyint(4) NOT NULL,
   `Endereco` varchar(500) NOT NULL
@@ -116,6 +116,11 @@ CREATE TABLE `usuario` (
 --
 -- Índices para tabelas despejadas
 --
+
+INSERT INTO `usuario`(`UserID`, `Nome`, `Email`, `Senha`, `CPF`, `IsADM`, `Endereco`) 
+VALUES (1,"HenriqueFT","asdf@gmail.com","ðäÂ÷lX‘nÂXòF…ê Ô$z/Ãá†”Fá;","12345678900",1,"Rio de janeiro")
+
+--A senha eh 'asdf' , o valor passou por SHA
 
 --
 -- Índices para tabela `avaliacoes`

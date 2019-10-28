@@ -15,10 +15,14 @@
         <h3>Bem vindo de volta!</h3>
         <h4>Insira suas informações para acessar sua conta.</h4>
         
+        <%
+        request.getSession().setAttribute("action", "login");
+        %>
+        
         <form method="POST" action="UsuarioController" name="formLogin" id="loginForm">
             
-            <p>CPF:
-            <input type="text" name="cpf" maxlength="11" minlength="11" required>
+            <p>Email
+            <input type="text" name="email" required>
             </p>
             <p>Senha:
             <input type="password" id="senha" name="senha" maxlength="10" required>

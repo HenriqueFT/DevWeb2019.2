@@ -35,7 +35,7 @@
                         <div class="collapse navbar-collapse ">
                             <div class="navbar-nav">
                                 <a href="ProdutoController?show=Produtos" data-toggle="tooltip" title="Banco de Dados"><span class="nav-item nav-link fas fa-database" ></span></a>
-                                <a href="#" data-toggle="tooltip" title="Login"><span class="nav-item nav-link fas fa-door-open"></span></a>
+                                <a href="UsuarioController?action=login" data-toggle="tooltip" title="Login"><span class="nav-item nav-link fas fa-door-open"></span></a>
                                 <a href="#" data-toggle="tooltip" title="Perfil"><span class="nav-item nav-link fas fa-user"></span></a>
                                 <a href="#" data-toggle="tooltip" title="Carrinho"><span class="nav-item nav-link fas fa-shopping-cart"></span></a>
                             </div>                   
@@ -47,7 +47,7 @@
                 <a href="ProdutoController?show=Produtos">
                     <button type="button" class="btn btn-secondary">Produtos</button>
                 </a>
-                <a href="ProdutoController?show=Usuarios">
+                <a href="UsuarioController?show=Usuarios">
                     <button type="button" class="btn btn-secondary">Usuarios</button>
                 </a>
             </div>
@@ -97,9 +97,42 @@
         <%
         }else if(show.equalsIgnoreCase("Usuarios")){
         %>
-            <div class="tabelasBanco container-fluid">
-                <h1>Exibe Usuario ainda nao implementado</h1>
-            </div>
+            <!--UserID,Nome, Email, Senha, CPF, IsADM, Endereco-->
+        
+        <div class="tabelasBanco container-fluid">
+            <a href="UsuarioController?action=insert&id=0">
+                  <button type="button" class="btn btn-warning btn-thin btn-insert">Inserir Item</button>
+            </a><br>
+            <table class='tableList'>
+                <thead>
+                    <tr>
+                        <th>UserID</th> 
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Senha</th>
+                        <th>CPF</th>
+                        <th>IsADM</th>
+                        <th>Endereco</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${UsuarioDAO}" var="usuario">
+                        <tr>
+                            <th><c:out value="${usuario.userId}" /></th>
+                            <th><c:out value="${usuario.nome}" /></th>
+                            <th><c:out value="${usuario.email}" /></th>
+                            <th><c:out value="${usuario.senha}" /></th>
+                            <th><c:out value="${usuario.cpf}" /></th>
+                            <th><c:out value="${usuario.isAdm}" /></th>
+                            <th><c:out value="${usuario.endereco}" /></th>
+                            <!--TEM QUE  ATUALIZAR AQUI PARA VER O ID PRA VERSE EH ADM,olhando a sessao-->
+                            <th><a href="UsuarioController?action=update&id=<c:out value="${usuario.userId}"/>">Update</a></th>
+                            <th><a href="UsuarioController?action=delete&id=<c:out value="${usuario.userId}"/>">Delete</a></th>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
         <%
         }else{
             System.out.println("ERRO: Show possuia algo nao implementado");

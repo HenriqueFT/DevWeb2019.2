@@ -32,6 +32,8 @@ public class UsuarioController extends HttpServlet {
     //ID Nom//ID Nome CPF isADM Cidade Endereco NFUncionarioe CPF isADM Cidade Endereco NFUncionario
     private static String INSERT = "/paginaCadastro.jsp";
     private static String UPDATE = "/xxxUpdateForm.jsp";            //<-- Essas3 ainda nao estao corretas
+    private static String LOGIN = "/paginaLogin.jsp";
+    private static String LOGINMESSAGE ="/loginMessage.jsp";
     private static String LIST_USUARIO = "/bancoDeDados.jsp";
     private UsuarioDAO dao;
     
@@ -39,9 +41,8 @@ public class UsuarioController extends HttpServlet {
     private static String SENHA="senha";
     private static String CPF="cpf";
     private static String ISADM="isADM";
-    private static String CIDADE="cidade";
+    private static String EMAIL="email";
     private static String ENDERECO="endereco";
-    private static String NFUNCIONARIOS="nfuncionarios";
            
     
     public UsuarioController() {
@@ -52,10 +53,24 @@ public class UsuarioController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forward = "";
         String action = "ListaUsuarios";
+        String show = "Usuarios";
+        
         try {
             action = request.getParameter("action");
         } catch(Exception e){
             action = "ListaUsuarios";
+        }
+        
+        try {
+            show = request.getParameter("show");
+        } catch(Exception e){
+            show = "Usuarios";
+        }
+        
+        request.setAttribute("show", show);
+        
+        if(dao.getUsuarios()!=null){
+            System.out.println("");
         }
             
         if (action == null){   
@@ -63,10 +78,7 @@ public class UsuarioController extends HttpServlet {
             request.setAttribute("UsuarioDAO", dao.getUsuarios());
         } else if (action.equalsIgnoreCase("insert")){
             forward = INSERT;
-            int id = Integer.parseInt(request.getParameter("id"));
-            Usuario usuario = dao.getUsuario(id);
             request.setAttribute("action", "insert");
-            request.setAttribute("Usuario", usuario);
         }else if (action.equalsIgnoreCase("ListaUsuarios")){
             forward = LIST_USUARIO;
             request.setAttribute("UsuarioDAO", dao.getUsuarios());
@@ -81,7 +93,10 @@ public class UsuarioController extends HttpServlet {
             dao.deleteUsuario(id);
             forward = LIST_USUARIO;
             request.setAttribute("UsuarioDAO", dao.getUsuarios());    
-        }  else {
+        }  else if(action.equalsIgnoreCase("login")){
+            forward = LOGIN;
+            request.setAttribute("action", "login");
+        }else{
             forward = INSERT;
         }
  
@@ -101,8 +116,7 @@ public class UsuarioController extends HttpServlet {
          
         int id = 0;
 
-        //ID Nome CPF isADM Cidade Endereco NFUncionario
-        if(s.equals("update") || s.equals("login")){
+        if(s.equals("update")){
             try {
                 id = Integer.parseInt(request.getParameter("id"));
             } catch(Exception e){
@@ -111,14 +125,17 @@ public class UsuarioController extends HttpServlet {
             } 
         }
         
-
-                
         usuario.setUserId(id);
         usuario.setNome(request.getParameter(NOME));
+        usuario.setEmail(request.getParameter(EMAIL));
         usuario.setCpf(request.getParameter(CPF));
-        // usuario.setIsAdm(Integer.parseInt(request.getParameter(ISADM)));
-        usuario.setIsAdm(0);
         usuario.setEndereco(request.getParameter(ENDERECO));
+
+        if(request.getParameter(ISADM)==null){
+            usuario.setIsAdm(0);
+        }else{
+            usuario.setIsAdm(Integer.parseInt(request.getParameter(ISADM)));
+        }
         
         String senha = request.getParameter(SENHA);
         String senhaEncriptada="";
@@ -130,8 +147,11 @@ public class UsuarioController extends HttpServlet {
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
-           
-        //usuario.setSenha(senhaEncriptada);
+        
+        System.out.println("Senha Encripada : \n "+senhaEncriptada);
+        
+        usuario.setSenha(senhaEncriptada);
+        
         
         //--------------------Fazer checagem se eh adm depois------------------ 
          
@@ -151,8 +171,26 @@ public class UsuarioController extends HttpServlet {
              dao.addProduto(produto);
             }
         */
-        dao.addUsuario(usuario);//Por enquanto nao tem protecao de quem faz isso
+        
+        
+        RequestDispatcher view = request.getRequestDispatcher(LIST_USUARIO);
+        
         if(s.equals("login")){
+            usuario=dao.loginUsuario(usuario.getEmail(), usuario.getSenha());
+            request.getSession().setAttribute("usuarioLogado", usuario);
+            
+            view = request.getRequestDispatcher(LOGINMESSAGE);
+            
+            
+            if(usuario!=null){
+                System.out.println("LOGIN FUNCIONOU");
+                request.setAttribute("loginSucess", "true");
+            }else{
+                System.out.println("LOGIN INCORRETO");
+                request.setAttribute("loginSucess", "false");
+            }
+            
+           //TEM QUE FAZER A PARADA  DO COOKIE AQUI
             
         }else if(s.equals("update")){
             dao.updateUsuario(usuario);
@@ -160,16 +198,7 @@ public class UsuarioController extends HttpServlet {
             dao.addUsuario(usuario);//Por enquanto nao tem protecao de quem faz isso
         }
         
-        //!!!!!!!!!!!!!!!!!!!!!!!NAO COMPLETO CORRETAMENTE!!!!!!!!!!!!!!!!!!!!!!!
-        //----------------------------------- OBS !!!!!!!!!!!!!!!
-        //Dependendo do usuario e da acao ele nao deve ir para o banco de dados depois 
-        //do Login,criar conta ou modificar conta
-        
-        //String previousPage = request.getHeader("referer"); 
-        String previousPage = (String) request.getAttribute("javax.servlet.forward.request.url");
-        
-        RequestDispatcher view = request.getRequestDispatcher(LIST_USUARIO);
-        //RequestDispatcher view = request.getRequestDispatcher(previousPage);
+
         request.setAttribute("UsuarioDAO", dao.getUsuarios());
         view.forward(request, response);
         

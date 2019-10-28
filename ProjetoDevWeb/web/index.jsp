@@ -3,6 +3,7 @@
     Created on : 08/10/2019, 19:07:11
     Author     : Usuario
 --%>
+<%@page import="modelos.Usuario"%>
 <%@page import="util.FormataPreco"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
@@ -23,6 +24,13 @@
     </head>
 
     <body>
+        <%
+            Usuario usu = (Usuario) request.getSession().getAttribute("usuarioLogado");
+            System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n"+usu.getNome());
+            
+        
+        %>
+        
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top my-nav">
             <div class="container-fluid">
                 <div class="navbar-header"> 
@@ -40,7 +48,7 @@
                             <a href="ProdutoController?show=Produtos" data-toggle="tooltip" title="Banco de Dados"><span class="nav-item nav-link fas fa-database" ></span></a>
                             <a href="UsuarioController?action=login" data-toggle="tooltip" title="Login"><span class="nav-item nav-link fas fa-door-open"></span></a>
                             <a href="#" data-toggle="tooltip" title="Perfil"><span class="nav-item nav-link fas fa-user"></span></a>
-                            <a href="#" data-toggle="tooltip" title="Carrinho"><span class="nav-item nav-link fas fa-shopping-cart"></span></a>
+                            <a href="paginaCarrinho.jsp" data-toggle="tooltip" title="Carrinho"><span class="nav-item nav-link fas fa-shopping-cart"></span></a>
                         </div>                   
                     </div> 
                 </div>

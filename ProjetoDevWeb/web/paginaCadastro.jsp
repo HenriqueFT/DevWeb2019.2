@@ -15,36 +15,41 @@
         <h3>Ainda não possui uma conta?</h3>
         <h4>Insira suas informações abaixo:</h4>
         
+        <%
+        request.getSession().setAttribute("action", "insert");
+        %>
+        
         <form method="POST" action="UsuarioController" name="formAddUsuario" id="usuarioForm">
             <table class="tableForm">
                 
-                
+                     <!--UserID,Nome, Email, Senha, CPF, IsADM, Endereco-->
             <tr>
                 <td>Nome completo:</td>
-                <td><input type="text" name="nomecompleto" maxlength="100" required></td>
+                <td><input type="text" name="nome" maxlength="100" required></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input type="text" name="email" required></td>
             </tr>
             <tr>
                 <td>CPF:</td>
                 <td><input type="text" name="cpf" maxlength="11" minlength="11" required></td>
             </tr>
             <tr>
-                <td>Senha: 
+                <td>Senha: </td>
                 <td><input type="password" name="senha" maxlength="20" required></td>
             </tr>
             <tr>
-                <td>Confirme a senha: 
+                <td>Confirme a senha: </td>
                 <td><input type="password" name="senha_confirmacao" maxlength="20" required></td>
             </tr>
             <tr>
-                <td>Endereço:
+                <td>Endereço:</td>
                 <td><textarea name="endereco" rows="2" columns="20" required></textarea></td>
-            <tr>
-                <td>Cidade:
-                <td><input type="text" name="cidade" maxlength="30" required></td>
             </tr>
+ 
 
         </table>
-            
             <input type="submit" value="Enviar">
             
         </form>
