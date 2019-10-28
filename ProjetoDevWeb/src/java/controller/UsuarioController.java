@@ -118,7 +118,6 @@ public class UsuarioController extends HttpServlet {
         usuario.setCpf(request.getParameter(CPF));
         // usuario.setIsAdm(Integer.parseInt(request.getParameter(ISADM)));
         usuario.setIsAdm(0);
-       usuario.setCidade(request.getParameter(CIDADE));
         usuario.setEndereco(request.getParameter(ENDERECO));
         
         String senha = request.getParameter(SENHA);
