@@ -51,7 +51,7 @@
                 <tr>
                     <td>Email: </td>
                     <td>
-                        <input type="text" name="email" required value="${usuario.email}" >
+                        <input type="text" name="email" required value="<c:out value="${usuario.email}"/>" >
                     </td>
                 </tr>
                 <tr>
