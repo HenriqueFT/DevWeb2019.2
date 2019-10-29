@@ -20,9 +20,8 @@
         %>
         
         <form method="POST" action="UsuarioController" name="formAddUsuario" id="usuarioForm">
-            <table class="tableForm">
-                
-                     <!--UserID,Nome, Email, Senha, CPF, IsADM, Endereco-->
+            <table class="tableForm">         
+                     
             <tr>
                 <td>Nome completo:</td>
                 <td><input type="text" name="nome" maxlength="100" required></td>

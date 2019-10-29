@@ -26,11 +26,9 @@
     <body>
         <%
             if(request.getSession().getAttribute("usuarioLogado")!=null){
-                Usuario usu = (Usuario)request.getSession().getAttribute("usuarioLogado") ;
-                System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n"+usu.getNome());
+                Usuario usu = (Usuario) request.getSession().getAttribute("usuarioLogado") ;
+                System.out.println("$$$$ Se Usuario nao eh nulo tem algo aqui: "+usu+"  $$$$$");
             }
-            
-        
         %>
         
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top my-nav">

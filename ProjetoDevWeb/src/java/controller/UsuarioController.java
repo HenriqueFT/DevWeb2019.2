@@ -29,9 +29,9 @@ import java.security.NoSuchAlgorithmException;
 @WebServlet(name = "UsuarioController", urlPatterns = {"/UsuarioController"})
 
 public class UsuarioController extends HttpServlet {
-    //ID Nom//ID Nome CPF isADM Cidade Endereco NFUncionarioe CPF isADM Cidade Endereco NFUncionario
+
     private static String INSERT = "/paginaCadastro.jsp";
-    private static String UPDATE = "/xxxUpdateForm.jsp";            //<-- Essas3 ainda nao estao corretas
+    private static String UPDATE = "/paginaUsuarioUpdate.jsp";            //<-- Essas3 ainda nao estao corretas
     private static String LOGIN = "/paginaLogin.jsp";
     private static String LOGINMESSAGE ="/loginMessage.jsp";
     private static String LIST_USUARIO = "/bancoDeDados.jsp";
@@ -177,10 +177,11 @@ public class UsuarioController extends HttpServlet {
         
         if(s.equals("login")){
             usuario=dao.loginUsuario(usuario.getEmail(), usuario.getSenha());
+            System.out.println("666-Sobre o Usuario "+usuario.getNome()+","+usuario.getCpf()+","+usuario.getEmail()+","+usuario.getEndereco()+","+usuario.getIsAdm());         
+      
             request.getSession().setAttribute("usuarioLogado", usuario);
             
             view = request.getRequestDispatcher(LOGINMESSAGE);
-            
             
             if(usuario!=null){
                 System.out.println("LOGIN FUNCIONOU");

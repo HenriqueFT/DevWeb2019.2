@@ -128,7 +128,7 @@ public class UsuarioDAO {
         }
     }
     
-    //SELECT * FROM `usuario` WHERE `email`="asdf@gmail.com" AND`senha`=1234;
+    //SELECT * FROM `usuario` WHERE `email`="asdf@gmail.com" AND`senha`=asdf;
     public Usuario loginUsuario(String email,String senha) {
         Usuario usu= new Usuario();
         try {

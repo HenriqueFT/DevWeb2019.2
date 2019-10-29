@@ -36,7 +36,6 @@
                     <td>Descricao: </td>
                     <td>
                         <textarea rows="4" cols="50" name="descricao"  form="produtoForm"><c:out value="${produto.descricao}"/></textarea>
-                        <!--input type="textarea" name="descricao"  value="<c:out value="${produto.descricao}"/>" -->
                     </td>
                 </tr>
                 <tr>
