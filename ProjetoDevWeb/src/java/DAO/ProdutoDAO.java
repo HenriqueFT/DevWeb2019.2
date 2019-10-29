@@ -48,7 +48,6 @@ public class ProdutoDAO {
         try {
             Connection conn=Database.getConnection();
             PreparedStatement ps = conn.prepareStatement("select * from produto where idProduto = ?");
-            System.out.println("vai atualizar usuario com idProduto=" + id );
             ps.setInt(1, id);
             ResultSet resp = ps.executeQuery();
             if (resp.next()) {// found  

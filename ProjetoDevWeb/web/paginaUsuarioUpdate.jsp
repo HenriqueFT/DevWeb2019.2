@@ -14,12 +14,12 @@
         request.getSession().setAttribute("action", "update");
         Usuario usuario= new Usuario();
         if(request.getSession().getAttribute("usuarioLogado")!=null){
-           usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");  
+           usuario = (Usuario) request.getSession().getAttribute("usuarioLogado"); 
+           request.setAttribute("usuario", usuario);
         %>
         <form method="POST" action="UsuarioController" name="formEditUsuario" id="formEditUsuario">
             <table class="tableForm">
-                <%System.out.println("Sobre o Usuario "+usuario.getNome()+","+usuario.getCpf()+","+usuario.getEmail()+","+usuario.getEndereco()+","+usuario.getIsAdm());%>
-                <!--Deixar certo que o que o usuario nao deveria ver nao apareca-->
+                 <!--Deixar certo que o que o usuario nao deveria ver nao apareca-->
                 <%if(usuario.getIsAdm()==0){%>
                     <style type="text/css">
                         .admOnly {

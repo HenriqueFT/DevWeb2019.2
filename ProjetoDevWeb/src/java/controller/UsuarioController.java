@@ -177,8 +177,7 @@ public class UsuarioController extends HttpServlet {
         
         if(s.equals("login")){
             usuario=dao.loginUsuario(usuario.getEmail(), usuario.getSenha());
-            System.out.println("666-Sobre o Usuario "+usuario.getNome()+","+usuario.getCpf()+","+usuario.getEmail()+","+usuario.getEndereco()+","+usuario.getIsAdm());         
-      
+            
             request.getSession().setAttribute("usuarioLogado", usuario);
             
             view = request.getRequestDispatcher(LOGINMESSAGE);

@@ -27,10 +27,10 @@
         <%
             if(request.getSession().getAttribute("usuarioLogado")!=null){
                 Usuario usu = (Usuario) request.getSession().getAttribute("usuarioLogado") ;
-                System.out.println("$$$$ Se Usuario nao eh nulo tem algo aqui: "+usu+"  $$$$$");
             }
         %>
-        
+         
+          
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top my-nav">
             <div class="container-fluid">
                 <div class="navbar-header"> 
@@ -63,13 +63,6 @@
                     Iterator<Produto> iProdutos = produtos.iterator();
                 %>
                 <table class="filmes">
-                    <!--- <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Descricao</th>
-                            <th>Preço</th>
-                        </tr>
-                    </thead> --->
                 <%
                     while (iProdutos.hasNext()) {
                         Produto produto = iProdutos.next();
