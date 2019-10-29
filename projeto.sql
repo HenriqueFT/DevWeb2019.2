@@ -118,7 +118,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario`(`UserID`, `Nome`, `Email`, `Senha`, `CPF`, `IsADM`, `Endereco`) 
-VALUES (1,"HenriqueFT","asdf@gmail.com","ðäÂ÷lX‘nÂXòF…ê Ô$z/Ãá†”Fá;","12345678900",1,"Rio de janeiro")
+VALUES (1,"HenriqueFT","asdf@gmail.com","™³¼ö�æS¡wÆÝ™™ ;ž²žP£¯ššóü¿«Gj","12345678900",1,"Rio de janeiro")
 
 --A senha eh 'asdf' , o valor passou por SHA
 
