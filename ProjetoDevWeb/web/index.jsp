@@ -25,8 +25,10 @@
 
     <body>
         <%
-            Usuario usu = (Usuario) request.getSession().getAttribute("usuarioLogado");
-            System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n"+usu.getNome());
+            if(request.getSession().getAttribute("usuarioLogado")!=null){
+                Usuario usu = (Usuario)request.getSession().getAttribute("usuarioLogado") ;
+                System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n"+usu.getNome());
+            }
             
         
         %>
