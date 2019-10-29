@@ -56,13 +56,13 @@
         </nav>
         
         <div class="midBody">
-            <div class="exibeProdutos">
+            <div class="exibeProdutos container-fluid">
                 <%
                     ProdutoDAO produtoDAO = new ProdutoDAO();
                     List<Produto> produtos = produtoDAO.getProdutos();
                     Iterator<Produto> iProdutos = produtos.iterator();
                 %>
-                <table>
+                <table class="filmes">
                     <!--- <thead>
                         <tr>
                             <th>Nome</th>
@@ -77,14 +77,14 @@
                     <tbody>
                     <%
                         out.println("<tr>");
-                        out.println("<td style='min-width:50px'><img src='img/" + produto.getImagem() + "' width='40' height='60'></td>");
-                        out.println("<td style='min-width:150px'><a href='paginaProduto.jsp?id=" + produto.getId() + "'>" + produto.getNome() + "</a></td>");
+                        out.println("<td style='min-width:50px'><img src='img/" + produto.getImagem()+ "' width='120' height='180'></td>");
+                        out.println("<td style='min-width:150px '><a href='paginaProduto.jsp?id=" + produto.getId() + "'>" + produto.getNome() + "</a></td>");
                         out.println("<td style='min-width:250px'>" + produto.getDescricao() + "</td>");
                         out.println("<td style='min-width:50px'>" + FormataPreco.formata((int) produto.getPreco()) + "</td>");
                         out.println("<td style='min-width:100px'><a href='paginaCarrinho.jsp?id="+produto.getId() + "'>Adicionar ao carrinho</a></td>");
                         out.println("</tr>");
                     %>
-                    <tbody>
+                    </tbody>
                         <%
                             }
                         %>

@@ -28,6 +28,7 @@ public class ProdutoDAO {
                 prod.setNome(resp.getString("nome"));
                 prod.setPreco(resp.getDouble("preco"));
                 prod.setDescricao(resp.getString("descricao"));
+                prod.setImagem(resp.getString("imagem"));
                 prod.setId(resp.getInt("idProduto"));
                 produtos.add(prod);
                 
@@ -55,6 +56,7 @@ public class ProdutoDAO {
                 prod.setId(resp.getInt("idProduto"));
                 prod.setNome(resp.getString("nome"));
                 prod.setPreco(resp.getDouble("preco"));
+                prod.setImagem(resp.getString("imagem"));
                 prod.setDescricao(resp.getString("descricao"));
                 return prod;
             }
