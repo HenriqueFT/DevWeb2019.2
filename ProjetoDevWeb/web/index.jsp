@@ -100,7 +100,7 @@
                 <%
                     if(pag!=0){
                     int antes = pag-1; 
-                    out.println("<form action=\"listaDeProdutos.jsp?pag="+antes+"\" method=\"post\">");
+                    out.println("<form action=\"index.jsp?pag="+antes+"\" method=\"post\">");
                     out.println("<button type=\"submit\" class=\"btn btn-secondary\">Anterior</button>");
                     out.println("</form>");
                     }
@@ -110,7 +110,7 @@
                 <%    
                     if(pag!=produtoDAO.ultimaPagina()){
                     int depois  = pag+1;
-                    out.println("<form action=\"listaDeProdutos.jsp?pag="+depois+"\" method=\"post\">");
+                    out.println("<form action=\"index.jsp?pag="+depois+"\" method=\"post\">");
                     out.println("<button type=\"submit\" class=\"btn btn-secondary\">Proximo</button>");
                     out.println("</form>");
                     }
