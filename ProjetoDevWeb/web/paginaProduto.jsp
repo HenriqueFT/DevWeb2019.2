@@ -82,6 +82,14 @@
             </a>
         </div>
         
+        <br>
+        <br>
+        <h3>Avaliar produto:</h3>
+        <p>Dê uma nota:</p>
+        <p>Escreva aqui sua avaliação:</p>
+        <textarea></textarea>
+        <a href="">Enviar</a>
+        <h3>Avaliações:</h3>
 
         
         <script src="style/jquery-3.4.1.min.js"></script>
