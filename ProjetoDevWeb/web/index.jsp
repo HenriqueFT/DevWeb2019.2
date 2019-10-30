@@ -73,8 +73,8 @@
                         out.println("<tr>");
                         out.println("<td style='min-width:50px '><img src='img/" + produto.getImagem()+ "' width='180' height='240'></td>");
                         out.println("<td style='min-width:150px; text-align:center; '><a href='paginaProduto.jsp?id=" + produto.getId() + "'>" + produto.getNome() + "</a></td>");
-                        //out.println("<td><p>" + produto.getDescricao() + "</p></td>");
-                        out.println("<td class='col-8 text-truncate' style='min-width:250px; max-width:750px; text-align:center;'>" + produto.getDescricao() + "</td>");
+                        out.println("<td><p class='text-justify'>" + produto.getDescricao() + "</p></td>");
+                        //out.println("<td class='col-8 text-truncate' style='min-width:250px; max-width:750px; text-align:center;'>" + produto.getDescricao() + "</td>");
                         out.println("<td style='min-width:50px;text-align:left;'>" + FormataPreco.formata((int) produto.getPreco()) + "</td>");
                         out.println("<td style='min-width:100px;text-align:center;'><a href='paginaCarrinho.jsp?id="+produto.getId() + "'>Adicionar ao carrinho</a></td>");
                         out.println("</tr>");
