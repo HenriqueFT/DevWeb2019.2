@@ -44,6 +44,22 @@ public class ProdutoDAO {
         return produtos;
     }
     
+     public List<Produto> getPagProdutos(int pag) {
+         List<Produto> produtos = new ArrayList<>();
+         produtos = getProdutos();
+         try {
+         produtos = produtos.subList(pag*5, (pag+1)*5);
+         } catch (java.lang.IndexOutOfBoundsException ex) {
+              produtos = produtos.subList(pag*5, produtos.size());
+         }
+     return produtos;
+     }
+     
+     public int ultimaPagina(){
+         List<Produto> produtos = getProdutos();
+     return produtos.size()/5;
+     }
+    
     public Produto getProduto(int id) {
         try {
             Connection conn=Database.getConnection();

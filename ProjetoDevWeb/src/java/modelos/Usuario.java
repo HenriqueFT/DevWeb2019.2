@@ -93,6 +93,5 @@ public class Usuario {
     public static boolean isADM(Usuario usuario){
         
         return true;
-    }
-    
+    }    
 }
