@@ -13,18 +13,49 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-     <%
-        UsuarioDAO crudUsuario = new UsuarioDAO();
-        Usuario usuario = crudUsuario.getUsuario(1);
+    <%
+    Usuario usuario = null;
+    if(request.getSession().getAttribute("usuarioLogado")!= null){
+        usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
+        request.setAttribute("usuario", usuario);
+
     %>
     <head>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                
+        <link rel="stylesheet" href="style/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="style/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style/style.css">
+        
+        <script src="https://kit.fontawesome.com/c6f434d274.js" crossorigin="anonymous"></script>
+        
         <% out.println("<title>Perfil do Usuario: - " + usuario.getNome() + "</title>"); %>
     </head>
     <body>
-        <h1><% out.println(usuario.getNome()); %></h1>
-        <h1><% out.println(usuario.getEmail()); %></h1>
-        <h1><% out.println(usuario.getEndereco()); %></h1>
+         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top my-nav">
+            <div class="container-fluid">
+                <div class="navbar-header"> 
+                    <a class="navbar-brand" href="index.jsp">
+                        <img src="img/icon.png" alt="VHS" width="55">
+                        Seu Perfil Lindo
+                    </a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon bg-light"></span>
+                </button>
+                <div class="navbar-right">
+                    <div class="collapse navbar-collapse ">
+                        <div class="navbar-nav">
+                            <a href="ProdutoController?show=Produtos" data-toggle="tooltip" title="Banco de Dados"><span class="nav-item nav-link fas fa-database" ></span></a>
+                            <a href="UsuarioController?action=login" data-toggle="tooltip" title="Login"><span class="nav-item nav-link fas fa-door-open"></span></a>
+                            <a href="paginaInfoUsuario.jsp" data-toggle="tooltip" title="Perfil"><span class="nav-item nav-link fas fa-user"></span></a>
+                            <a href="paginaCarrinho.jsp" data-toggle="tooltip" title="Carrinho"><span class="nav-item nav-link fas fa-shopping-cart"></span></a>
+                        </div>                   
+                    </div> 
+                </div>
+            </div>
+        </nav>
         
         <div class="midBody">
             <div class="container-fluid">
@@ -50,12 +81,23 @@
                             }
                         %>
                 </table>
-                <% 
-
-
-                %>
-
+                
+                
             </div>
         </div>
+        <%
+        }else{ 
+        %>
+        <jsp:forward page="pleaseLogin.jsp" /> 
+        <%}%>
+        
+        
+        <script src="style/jquery-3.4.1.min.js"></script>
+        <script src="style/bootstrap/js/bootstrap.min.js"></script>
     </body>
-</html>
+</html>    
+
+
+
+
+

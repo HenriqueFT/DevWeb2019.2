@@ -18,11 +18,10 @@ and open the template in the editor.
         <script src="https://kit.fontawesome.com/c6f434d274.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div class="topBody">
-            <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+             <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top my-nav">
                 <div class="container-fluid">
                     <div class="navbar-header"> 
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" href="index.jsp">
                             <img src="img/icon.png" alt="VHS" width="55">
                             Filmes Lindos
                         </a>
@@ -33,17 +32,15 @@ and open the template in the editor.
                     <div class="navbar-right">
                         <div class="collapse navbar-collapse ">
                             <div class="navbar-nav">
-                                <a href="ProdutoController?show=Produtos"><span class="nav-item nav-link fas fa-database" ></span></a>
-                                <a href="#"><span class="nav-item nav-link fas fa-door-open"></span></a>
-                                <a href="#"><span class="nav-item nav-link fas fa-user"></span></a>
-                                <a href="#"><span class="nav-item nav-link fas fa-shopping-cart"></span></a>
+                                <a href="ProdutoController?show=Produtos" data-toggle="tooltip" title="Banco de Dados"><span class="nav-item nav-link fas fa-database" ></span></a>
+                                <a href="UsuarioController?action=login" data-toggle="tooltip" title="Login"><span class="nav-item nav-link fas fa-door-open"></span></a>
+                                <a href="paginaInfoUsuario.jsp" data-toggle="tooltip" title="Perfil"><span class="nav-item nav-link fas fa-user"></span></a>
+                                <a href="paginaCarrinho.jsp" data-toggle="tooltip" title="Carrinho"><span class="nav-item nav-link fas fa-shopping-cart"></span></a>
                             </div>                   
                         </div> 
                     </div>
-
                 </div>
             </nav>
-        </div>
         <script src="style/jquery-3.4.1.min.js"></script>
         <script src="style/bootstrap/js/bootstrap.min.js"></script>
     </body>

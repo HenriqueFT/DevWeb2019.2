@@ -25,16 +25,21 @@
 
     <body>
         <%
+            Usuario usu= new Usuario();
             if(request.getSession().getAttribute("usuarioLogado")!=null){
-                Usuario usu = (Usuario) request.getSession().getAttribute("usuarioLogado") ;
+                usu = (Usuario) request.getSession().getAttribute("usuarioLogado") ;
             }
+            
         %>
-         
-          
+        <%
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            List<Produto> produtos = produtoDAO.getProdutos();
+            Iterator<Produto> iProdutos = produtos.iterator();
+        %> 
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top my-nav">
             <div class="container-fluid">
                 <div class="navbar-header"> 
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="index.jsp">
                         <img src="img/icon.png" alt="VHS" width="55">
                         Filmes Lindos
                     </a>
@@ -47,7 +52,7 @@
                         <div class="navbar-nav">
                             <a href="ProdutoController?show=Produtos" data-toggle="tooltip" title="Banco de Dados"><span class="nav-item nav-link fas fa-database" ></span></a>
                             <a href="UsuarioController?action=login" data-toggle="tooltip" title="Login"><span class="nav-item nav-link fas fa-door-open"></span></a>
-                            <a href="#" data-toggle="tooltip" title="Perfil"><span class="nav-item nav-link fas fa-user"></span></a>
+                            <a href="paginaInfoUsuario.jsp" data-toggle="tooltip" title="Perfil"><span class="nav-item nav-link fas fa-user"></span></a>
                             <a href="paginaCarrinho.jsp" data-toggle="tooltip" title="Carrinho"><span class="nav-item nav-link fas fa-shopping-cart"></span></a>
                         </div>                   
                     </div> 
@@ -57,11 +62,7 @@
         
         <div class="midBody">
             <div class="exibeProdutos container-fluid">
-                <%
-                    ProdutoDAO produtoDAO = new ProdutoDAO();
-                    List<Produto> produtos = produtoDAO.getProdutos();
-                    Iterator<Produto> iProdutos = produtos.iterator();
-                %>
+
                 <table class="filmes">
                 <%
                     while (iProdutos.hasNext()) {
@@ -70,11 +71,12 @@
                     <tbody>
                     <%
                         out.println("<tr>");
-                        out.println("<td style='min-width:50px'><img src='img/" + produto.getImagem()+ "' width='120' height='180'></td>");
-                        out.println("<td style='min-width:150px '><a href='paginaProduto.jsp?id=" + produto.getId() + "'>" + produto.getNome() + "</a></td>");
-                        out.println("<td style='min-width:250px'>" + produto.getDescricao() + "</td>");
-                        out.println("<td style='min-width:50px'>" + FormataPreco.formata((int) produto.getPreco()) + "</td>");
-                        out.println("<td style='min-width:100px'><a href='paginaCarrinho.jsp?id="+produto.getId() + "'>Adicionar ao carrinho</a></td>");
+                        out.println("<td style='min-width:50px '><img src='img/" + produto.getImagem()+ "' width='180' height='240'></td>");
+                        out.println("<td style='min-width:150px; text-align:center; '><a href='paginaProduto.jsp?id=" + produto.getId() + "'>" + produto.getNome() + "</a></td>");
+                        //out.println("<td><p>" + produto.getDescricao() + "</p></td>");
+                        out.println("<td class='col-8 text-truncate' style='min-width:250px; max-width:750px; text-align:center;'>" + produto.getDescricao() + "</td>");
+                        out.println("<td style='min-width:50px;text-align:left;'>" + FormataPreco.formata((int) produto.getPreco()) + "</td>");
+                        out.println("<td style='min-width:100px;text-align:center;'><a href='paginaCarrinho.jsp?id="+produto.getId() + "'>Adicionar ao carrinho</a></td>");
                         out.println("</tr>");
                     %>
                     </tbody>
@@ -82,11 +84,6 @@
                             }
                         %>
                 </table>
-                <% 
-
-
-                %>
-
             </div>
         </div>
         
