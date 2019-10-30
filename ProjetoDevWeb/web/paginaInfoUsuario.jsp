@@ -15,7 +15,8 @@
 <html>
      <%
         UsuarioDAO crudUsuario = new UsuarioDAO();
-        Usuario usuario = crudUsuario.getUsuario(1);
+        System.out.println(request.getParameter("id"));
+        Usuario usuario = crudUsuario.getUsuario(Integer.parseInt(request.getParameter("id")));
     %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

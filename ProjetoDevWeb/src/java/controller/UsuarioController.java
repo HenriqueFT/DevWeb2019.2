@@ -20,6 +20,7 @@ import modelos.Usuario;
 import modelos.Usuario;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.servlet.http.Cookie;
 
 //
 //------------------Todos os controllers com formato de CRUD podem ser assim,-----------------------
@@ -35,6 +36,8 @@ public class UsuarioController extends HttpServlet {
     private static String LOGIN = "/paginaLogin.jsp";
     private static String LOGINMESSAGE ="/loginMessage.jsp";
     private static String LIST_USUARIO = "/bancoDeDados.jsp";
+    private static String SHOW_CURRENT_USUARIO = "/paginaInfoUsuario.jsp";
+    
     private UsuarioDAO dao;
     
     private static String NOME="nome";
@@ -96,7 +99,25 @@ public class UsuarioController extends HttpServlet {
         }  else if(action.equalsIgnoreCase("login")){
             forward = LOGIN;
             request.setAttribute("action", "login");
-        }else{
+        }  else if (action.equalsIgnoreCase("showUsuario")){
+            System.out.println("entrou");
+            forward =SHOW_CURRENT_USUARIO;
+            Cookie cook=null;
+            Cookie[] cooks = request.getCookies();
+            String usu=null;
+            for (int i = 0; i < cooks.length; i++) {
+                if(cooks[i].getName().equals("idUser")){
+                    usu = cooks[i].getValue();
+                }
+            }
+            //Usuario usu = (Usuario)request.getSession().getAttribute("usuarioLogado");
+            System.out.println(usu+" aquui");
+            if(usu==null){
+                System.out.println("controller.UsuarioController.doGet() has null");
+            }
+            request.setAttribute("id", usu);
+        }
+        else{
             forward = INSERT;
         }
  
@@ -176,21 +197,27 @@ public class UsuarioController extends HttpServlet {
         RequestDispatcher view = request.getRequestDispatcher(LIST_USUARIO);
         
         if(s.equals("login")){
-            usuario=dao.loginUsuario(usuario.getEmail(), usuario.getSenha());
-            
+            Usuario usuario2=dao.loginUsuario(usuario.getEmail());
+            usuario =usuario2;
             request.getSession().setAttribute("usuarioLogado", usuario);
             
             view = request.getRequestDispatcher(LOGINMESSAGE);
             
             if(usuario!=null){
                 System.out.println("LOGIN FUNCIONOU");
+                
                 request.setAttribute("loginSucess", "true");
             }else{
                 System.out.println("LOGIN INCORRETO");
                 request.setAttribute("loginSucess", "false");
             }
             
-           //TEM QUE FAZER A PARADA  DO COOKIE AQUI
+           //TEM QUE FAZER A PARADA DO COOKIE AQUI
+            System.out.println(usuario2.getEmail());
+           Cookie idUser = new Cookie("idUser",""+usuario2.getUserId());
+           response.addCookie(idUser);
+                
+                        
             
         }else if(s.equals("update")){
             dao.updateUsuario(usuario);

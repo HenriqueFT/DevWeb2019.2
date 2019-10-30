@@ -129,14 +129,13 @@ public class UsuarioDAO {
     }
     
     //SELECT * FROM `usuario` WHERE `email`="asdf@gmail.com" AND`senha`=asdf;
-    public Usuario loginUsuario(String email,String senha) {
+    public Usuario loginUsuario(String email) {
         Usuario usu= new Usuario();
         try {
             Connection conn=Database.getConnection();
-            //a senha jachega encriptada nessa parte
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `usuario` WHERE `email`=? AND`senha`=?;");
+            //a senha ja chega encriptada nessa parte
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `usuario` WHERE `email`=?;");
             ps.setString(1, email);
-            ps.setString(2, senha);
             
             ResultSet resp = ps.executeQuery();
             if (resp.next()) {// found  
@@ -152,7 +151,8 @@ public class UsuarioDAO {
         } catch (Exception ex) {
             System.out.println("Error in check() -->" + ex.getMessage());
         } 
-        
+        System.out.println(usu.getNome());
+        System.out.println(usu.getUserId());
         return usu;
     }
     
