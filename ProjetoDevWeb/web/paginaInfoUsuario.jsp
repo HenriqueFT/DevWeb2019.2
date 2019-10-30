@@ -18,7 +18,6 @@
     if(request.getSession().getAttribute("usuarioLogado")!= null){
         usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
         request.setAttribute("usuario", usuario);
-
     %>
     <head>
 
@@ -33,6 +32,7 @@
         <% out.println("<title>Perfil do Usuario: - " + usuario.getNome() + "</title>"); %>
     </head>
     <body>
+
          <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top my-nav">
             <div class="container-fluid">
                 <div class="navbar-header"> 
@@ -59,28 +59,11 @@
         
         <div class="midBody">
             <div class="container-fluid">
-                <%
-                    ProdutoDAO produtoDAO = new ProdutoDAO();
-                    List<Produto> produtos = produtoDAO.getProdutos();
-                    Iterator<Produto> iProdutos = produtos.iterator();
-                %>
-                <table class="filmes">
-                <%
-                    while (iProdutos.hasNext()) {
-                        Produto produto = iProdutos.next();
-                %>
-                    <tbody>
+                <h1>
                     <%
-                        out.println("<tr>");
-                        out.println("<td style='min-width:50px'><img src='img/" + produto.getImagem()+ "' width='120' height='180'></td>");
-                        out.println("<td style='min-width:150px '><a href='paginaProduto.jsp?id=" + produto.getId() + "'>" + produto.getNome() + "</a></td>");
-                        out.println("</tr>");
+                        out.println(usuario.getEmail()+ " | "+ usuario.getCpf());
                     %>
-                    </tbody>
-                        <%
-                            }
-                        %>
-                </table>
+                </h1>
                 
                 
             </div>
