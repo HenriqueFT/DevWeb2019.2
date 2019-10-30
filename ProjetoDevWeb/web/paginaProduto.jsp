@@ -6,7 +6,10 @@
 <%@page import="DAO.ProdutoDAO"%>
 <%@page import="modelos.Produto"%>
 <%@page import="modelos.Carrinho"%>
+<%@page import="modelos.Avaliacao"%>
 <%@page import="DAO.CarrinhoDAO"%>
+<%@page import="DAO.AvaliacaoDAO"%>
+<%@page import="DAO.UsuarioDAO"%>
 
 <%@include file="include/checkCookieCarrinho.jsp" %>
 
@@ -85,15 +88,33 @@
         <br>
         <br>
         <h3>Avaliar produto:</h3>
-        <p>Dê uma nota:</p>
-        <p>Escreva aqui sua avaliação:</p>
-        <textarea></textarea>
+        <p>Dê sua nota:</p>
         <a href="">Enviar</a>
         <h3>Avaliações:</h3>
-
         
+        <%
+            AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            Avaliacao[] avaliacoes = avaliacaoDAO.getAvaliacoesByProduto(produto.getId()).toArray();
+            
+            for(int i = 0; i < avaliacoes.length; i++) {
+                Avaliacao avaliacao = avaliacoes[i];
+                
+                String nome = usuarioDAO.getUsuario(avaliacao.getUserId()).getNome();
+                int nota = avaliacao.getNota();
+                
+                try {
+                    out.println("<p>" + nome + "</p>");
+                    out.println("<p>" + Integer.toString(nota) + "</p>");
+                } catch (Exception e) {
+                    return;
+                }
+            }
+        %>
+    
         <script src="style/jquery-3.4.1.min.js"></script>
         <script src="style/bootstrap/js/bootstrap.min.js"></script>
+    
     </body>
 </html>
 
