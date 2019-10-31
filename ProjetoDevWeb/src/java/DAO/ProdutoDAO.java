@@ -57,11 +57,7 @@ public class ProdutoDAO {
      
      public int ultimaPagina(){
          List<Produto> produtos = getProdutos();
-         int temp = produtos.size()/5-1;
-         if(produtos.size()%5!=0){
-             temp++;
-         }
-         
+         int temp = produtos.size()/5-1;if(produtos.size()%5!=0){temp++;}
      return temp;
      }
     
