@@ -1,6 +1,6 @@
 <%-- 
-    Document   : notADMerror
-    Created on : Oct 15, 2019, 10:36:47 PM
+    Document   : finalizaCompra
+    Created on : Oct 31, 2019, 11:16:42 AM
     Author     : Henrique
 --%>
 
@@ -12,12 +12,15 @@
         <link rel="stylesheet" href="style/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="style/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="style/style.css">
-        <title>ERROR</title>
+        <title>Obrigado por  comprar</title>
     </head>
     <body>
-        <div class="basicPage container-fluid" style="text-align: center">
-            <h1>Deve ser ADM para entrar nesta pagina</h1>
-            <a style="text-align: center" href="index.jsp">Voltar</a>
+        <div class="basicPage container-fluid">
+            <h1>OBRIGADO PELA COMPRA!</h1>
+            <br>
+            <h2>VOLTE SEMPRE</h2>
+            <br>
+            <a href="index.jsp">Voltar a Loja</a>
         </div>
     </body>
 </html>

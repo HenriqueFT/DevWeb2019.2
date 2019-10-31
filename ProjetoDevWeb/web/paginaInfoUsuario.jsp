@@ -3,7 +3,7 @@
     Created on : 29/10/2019, 19:06:55
     Author     : Usuario
 --%>
-
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="modelos.Produto"%>
@@ -63,7 +63,10 @@
             <h1 class="tituloFilme"><% out.println(usuLog.getNome()); %></h1>
             <h1 class="text-justify"><% out.println(usuLog.getEmail()); %></h1>
             <h1 class="text-justify"><% out.println(usuLog.getEndereco()); %></h1>
-            <h1 class="text-justify"><% out.println(usuLog.getNome()); %></h1> 
+            <h1 class="text-justify"><% out.println(usuLog.getNome()); %></h1>
+            <a href="UsuarioController?action=update&id=<% out.println(usuLog.getUserId());%>" >
+               <button type="button" class="btn btn-secondary">Atualizar Conta</button> 
+            </a>
         </div>
         
         

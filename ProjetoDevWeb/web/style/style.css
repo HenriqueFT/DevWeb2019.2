@@ -73,3 +73,19 @@ th{
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.basicPage h1{
+    text-align: center;
+}
+
+.basicPage form{
+    font-size: large;
+}
+
+.carStyle{
+    font-size: x-large;
+}
+
+.basicPage a{
+    font-size: x-large;
+}
