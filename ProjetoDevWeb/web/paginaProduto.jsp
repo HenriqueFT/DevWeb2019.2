@@ -1,3 +1,4 @@
+<%@page import="modelos.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@page import="util.FormataPreco"%>
@@ -20,6 +21,13 @@
     <%
         ProdutoDAO crudProduto = new ProdutoDAO();
         Produto produto = crudProduto.getProduto(Integer.parseInt(request.getParameter("id")));
+    %>
+    
+    <%
+        Usuario usuLog= new Usuario();
+        if(request.getSession().getAttribute("usuarioLogado")!=null){
+            usuLog = (Usuario) request.getSession().getAttribute("usuarioLogado") ;
+        }
     %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -47,7 +55,9 @@
                 <div class="navbar-right">
                     <div class="collapse navbar-collapse ">
                         <div class="navbar-nav">
+                            <%if(usuLog.getIsAdm()==1){%>
                             <a href="ProdutoController?show=Produtos" data-toggle="tooltip" title="Banco de Dados"><span class="nav-item nav-link fas fa-database" ></span></a>
+                            <%}%>
                             <a href="UsuarioController?action=login" data-toggle="tooltip" title="Login"><span class="nav-item nav-link fas fa-door-open"></span></a>
                             <a href="paginaInfoUsuario.jsp" data-toggle="tooltip" title="Perfil"><span class="nav-item nav-link fas fa-user"></span></a>
                             <a href="paginaCarrinho.jsp" data-toggle="tooltip" title="Carrinho"><span class="nav-item nav-link fas fa-shopping-cart"></span></a>
@@ -83,9 +93,6 @@
         </div>
         
 
-        
-        <script src="style/jquery-3.4.1.min.js"></script>
-        <script src="style/bootstrap/js/bootstrap.min.js"></script>
     </body>
 </html>
 

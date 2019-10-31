@@ -74,9 +74,6 @@
         <jsp:forward page="pleaseLogin.jsp" /> 
         <%}%>
         
-        
-        <script src="style/jquery-3.4.1.min.js"></script>
-        <script src="style/bootstrap/js/bootstrap.min.js"></script>
     </body>
 </html>    
 

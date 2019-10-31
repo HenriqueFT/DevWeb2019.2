@@ -147,8 +147,7 @@ public class UsuarioController extends HttpServlet {
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        System.out.println("Senha Encripada : \n "+senhaEncriptada);
+      
         
         usuario.setSenha(senhaEncriptada);
         
