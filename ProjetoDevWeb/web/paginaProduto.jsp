@@ -136,6 +136,15 @@
                     }
                 %>
             </p>
+            <h3>Avaliação media do Produto:</h3>
+            <%if (avaliacoes.size() == 0) {
+            out.print("<p>Nenhuma avaliação ainda, seja o primeiro a avaliar!</p>");
+            }else{
+               Double media = avaliacaoDAO.mediaAvaliacoes(produto.getId());
+                out.println("<p>" + Double.toString(media) + "</p>");
+            }
+            %>
+            
             
             <h3>Avaliações:</h3>       
         
@@ -143,7 +152,7 @@
             UsuarioDAO usuarioDAO = new UsuarioDAO();
 
             if (avaliacoes.size() == 0) {
-                out.print("<p>Nenhuma avaliação ainda, seja o primeiro a avaliar!</p>");
+                
             }
             
             for(int i = 0; i < avaliacoes.size(); i++) {

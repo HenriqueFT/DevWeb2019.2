@@ -10,6 +10,7 @@ import java.util.List;
 import modelos.Produto;
 import java.sql.*;
 import codigo.Database;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -136,6 +137,26 @@ public class AvaliacaoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public double mediaAvaliacoes(int idProd){
+        Connection conn=Database.getConnection(); 
+        Double media=0.0;
+        try {
+            Statement select = conn.createStatement();
+            PreparedStatement ps = conn.prepareStatement("select AVG(Nota) from avaliacoes where idProduto = ?");
+            ps.setInt(1, idProd);
+            ResultSet resp = ps.executeQuery();
+            while(resp.next()){
+                media=resp.getDouble("AVG(Nota)");                
+            }
+            select.close();
+            resp.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AvaliacaoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return media;
     }
     
 }
