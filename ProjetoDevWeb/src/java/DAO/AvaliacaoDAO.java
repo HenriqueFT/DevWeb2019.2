@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package DAO;
-import Modelos.Avaliacao;
+import modelos.Avaliacao;
 import java.util.ArrayList;
 import java.util.List;
 import modelos.Produto;
@@ -23,7 +23,7 @@ public class AvaliacaoDAO {
         Connection conn=Database.getConnection();
         try {
             Statement select = conn.createStatement();
-            ResultSet resp = select.executeQuery("select * from avaliacao");
+            ResultSet resp = select.executeQuery("select * from avaliacoes");
             while(resp.next()){
                 Avaliacao aval = new Avaliacao();
                 aval.setUserId(resp.getInt("UserID"));
@@ -47,7 +47,7 @@ public class AvaliacaoDAO {
         Connection conn=Database.getConnection();
         try {
             Statement select = conn.createStatement();
-            PreparedStatement ps = conn.prepareStatement("select * from avaliacao where idProduto = ?");
+            PreparedStatement ps = conn.prepareStatement("select * from avaliacoes where idProduto = ?");
             ps.setInt(1, id);
             ResultSet resp = ps.executeQuery();
             while(resp.next()){
@@ -73,7 +73,7 @@ public class AvaliacaoDAO {
     public Avaliacao getAvaliacao(int id,int idUser) {
         try {
             Connection conn=Database.getConnection();
-            PreparedStatement ps = conn.prepareStatement("select * from valiacao where idProduto = ?, UserID=?");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `avaliacoes` WHERE idProduto=? and UserID=?");
             ps.setInt(1, id);
             ps.setInt(2,idUser);
             ResultSet resp = ps.executeQuery();
@@ -95,7 +95,7 @@ public class AvaliacaoDAO {
     public void addAvaliacao(Avaliacao aval) {
         try {
             Connection conn=Database.getConnection();
-            PreparedStatement preparedStatement = conn.prepareStatement("insert into avaliacao(UserID, idProduto, Nota) values (?, ?, ?)");
+            PreparedStatement preparedStatement = conn.prepareStatement("insert into avaliacoes(UserID, idProduto, Nota) values (?, ?, ?)");
             // Parameters start with 1
             
             preparedStatement.setInt(1, aval.getUserId());
@@ -125,7 +125,7 @@ public class AvaliacaoDAO {
     public void updateAvaliacao(Avaliacao aval) {
         try {
             Connection conn=Database.getConnection();
-            PreparedStatement preparedStatement = conn.prepareStatement("update avaliacao set Nota=?"
+            PreparedStatement preparedStatement = conn.prepareStatement("update avaliacoes set Nota=?"
                     + " where idProduto = ?, UserID=?");
             preparedStatement.setInt(1, aval.getNota());
             preparedStatement.setInt(2, aval.getIdProduto());

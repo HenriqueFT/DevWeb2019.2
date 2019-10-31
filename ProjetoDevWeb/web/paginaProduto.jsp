@@ -7,11 +7,21 @@
 <%@page import="modelos.Produto"%>
 <%@page import="modelos.Carrinho"%>
 <%@page import="modelos.Avaliacao"%>
+<%@page import="modelos.Usuario"%>
 <%@page import="DAO.CarrinhoDAO"%>
 <%@page import="DAO.AvaliacaoDAO"%>
 <%@page import="DAO.UsuarioDAO"%>
 
 <%@include file="include/checkCookieCarrinho.jsp" %>
+
+<%
+    Usuario usuLog = new Usuario();
+    usuLog.setUserId(1);
+    request.getSession().setAttribute("usuarioLogado", usuLog);
+    if(request.getSession().getAttribute("usuarioLogado") != null){
+        usuLog = (Usuario) request.getSession().getAttribute("usuarioLogado") ;
+    }
+%>
 
 <%
     CarrinhoDAO carrinhoDAO = new CarrinhoDAO(idCarrinho);
@@ -84,34 +94,70 @@
                 <button type="button" class="btn btn-secondary">Adicionar ao carrinho</button>
             </a>
         </div>
-        
-        <br>
-        <br>
-        <h3>Avaliar produto:</h3>
-        <p>Dê sua nota:</p>
-        <a href="">Enviar</a>
-        <h3>Avaliações:</h3>
-        
-        <%
-            AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            Avaliacao[] avaliacoes = avaliacaoDAO.getAvaliacoesByProduto(produto.getId()).toArray();
+        <div class="midBody container-fluid">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h3>Avaliar produto:</h3>
+            <p> Dê sua nota: 
+                <%
+                    AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
+                    List<Avaliacao> avaliacoes = avaliacaoDAO.getAvaliacoesByProduto(produto.getId());
+                    
+                    if (usuLog == null) {
+                        out.print("Você deve estar logado para avaliar.");
+                    } else if(avaliacaoDAO.getAvaliacao(produto.getId(), usuLog.getUserId()) != null) {
+                        out.print("Você já avaliou esse produto.");
+                    } else {
+                        for (int i = 0; i < 5; i++) {
+                            out.print("<a href='fazAvaliacao.jsp?nota=" + (i + 1) + "&idProduto=" + produto.getId() + "'>☆</a>");
+                        }
+                    }
+                %>
+            </p>
             
-            for(int i = 0; i < avaliacoes.length; i++) {
-                Avaliacao avaliacao = avaliacoes[i];
+            <h3>Avaliações:</h3>       
+        
+        <%            
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+            if (avaliacoes.size() == 0) {
+                out.print("<p>Nenhuma avaliação ainda, seja o primeiro a avaliar!</p>");
+            }
+            
+            for(int i = 0; i < avaliacoes.size(); i++) {
+                Avaliacao avaliacao = avaliacoes.get(i);
                 
                 String nome = usuarioDAO.getUsuario(avaliacao.getUserId()).getNome();
                 int nota = avaliacao.getNota();
                 
                 try {
-                    out.println("<p>" + nome + "</p>");
-                    out.println("<p>" + Integer.toString(nota) + "</p>");
+                    out.println("<p>" + nome + ": " + Integer.toString(nota) + "</p>");
                 } catch (Exception e) {
                     return;
                 }
             }
         %>
-    
+        </div>
+        
         <script src="style/jquery-3.4.1.min.js"></script>
         <script src="style/bootstrap/js/bootstrap.min.js"></script>
     
