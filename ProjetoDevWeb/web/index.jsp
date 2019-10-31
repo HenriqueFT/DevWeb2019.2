@@ -46,21 +46,6 @@
     <body>
 
         <!-- Navbar basicamente se utilizando de cosias do bootstrap, eh utilizado em quase todas as paginas do site-->
-
-        <%
-            
-            Usuario usu= new Usuario();
-            if(request.getSession().getAttribute("usuarioLogado")!=null){
-                usu = (Usuario) request.getSession().getAttribute("usuarioLogado") ;
-            }
-            
-        %>
-        <%
-            ProdutoDAO produtoDAO = new ProdutoDAO();
-            List<Produto> produtos = produtoDAO.getProdutos();
-            Iterator<Produto> iProdutos = produtos.iterator();
-        %> 
-
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top my-nav">
             <div class="container-fluid">
                 <!--Parte  que fica a esquerda como titulo-->
