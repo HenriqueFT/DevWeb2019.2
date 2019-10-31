@@ -141,7 +141,7 @@
                             <th><c:out value="${usuario.isAdm}" /></th>
                             <th><c:out value="${usuario.endereco}" /></th>
                             <!--TEM QUE  ATUALIZAR AQUI PARA VER O ID PRA VERSE EH ADM,olhando a sessao-->
-                            <th><a href="UsuarioController?action=update&id=<c:out value="${usuario.userId}"/>">Update</a></th>
+                            <th><a href="UsuarioController?db=true&action=update&id=<c:out value="${usuario.userId}"/>">Update</a></th>
                             <th><a href="UsuarioController?action=delete&id=<c:out value="${usuario.userId}"/>">Delete</a></th>
                         </tr>
                     </c:forEach>

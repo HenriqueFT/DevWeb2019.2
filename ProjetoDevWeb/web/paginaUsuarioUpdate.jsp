@@ -17,15 +17,17 @@
         <% 
         request.getSession().setAttribute("action", "update");
         Usuario usuario= new Usuario();
-        String temp = (String) request.getSession().getAttribute("db");
-        
+
         if(request.getSession().getAttribute("usuarioLogado")!=null){
            usuario = (Usuario) request.getSession().getAttribute("usuarioLogado"); 
-           request.setAttribute("usuario", usuario);
+           Usuario tempUsu = usuario;  
+           request.setAttribute("usuario", tempUsu);
            
-            if(temp.equalsIgnoreCase("true")){
-
+            if(request.getAttribute("db")!=null){
+               tempUsu = (Usuario) request.getAttribute("Usuario");
+               request.setAttribute("usuario", tempUsu);
             }
+
         %>
         <form method="POST" action="UsuarioController" name="formEditUsuario" id="formEditUsuario">
             <table class="tableForm">

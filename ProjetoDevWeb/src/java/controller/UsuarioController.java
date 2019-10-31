@@ -56,6 +56,7 @@ public class UsuarioController extends HttpServlet {
         String forward = "";
         String action = "ListaUsuarios";
         String show = "Usuarios";
+        String db = null;
         
         try {
             action = request.getParameter("action");
@@ -67,6 +68,12 @@ public class UsuarioController extends HttpServlet {
             show = request.getParameter("show");
         } catch(Exception e){
             show = "Usuarios";
+        }
+        
+        try {
+            db = request.getParameter("db");
+        } catch(Exception e){
+            db = null;
         }
 
         request.setAttribute("show", show);
@@ -102,6 +109,7 @@ public class UsuarioController extends HttpServlet {
             forward = UPDATE;
             int id = Integer.parseInt(request.getParameter("id"));
             usuario = dao.getUsuario(id);
+            request.setAttribute("db", db);
             request.setAttribute("action", "update");
             request.setAttribute("Usuario", usuario);  
         } else if (action.equalsIgnoreCase("delete")){
