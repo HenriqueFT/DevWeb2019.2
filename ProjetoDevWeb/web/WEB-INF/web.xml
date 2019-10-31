@@ -5,17 +5,6 @@
 	 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	 version="3.1">
     
-    <!--Este primeiro eh um exemplo a ser copiado para usarmos nos  demais controllers-->
-    <servlet>
-        <servlet-name>xxxController</servlet-name>
-        <servlet-class>controller.xxxController</servlet-class>
-    </servlet> 
-    <servlet-mapping>
-        <servlet-name>xxxController</servlet-name>
-        <url-pattern>/xxxController</url-pattern>
-    </servlet-mapping>
-    
-    
     <servlet>
         <servlet-name>CarrinhoController</servlet-name>
         <servlet-class>controller.CarrinhoController</servlet-class>
@@ -42,10 +31,6 @@
         <servlet-name>usuarioController</servlet-name>
         <url-pattern>/usuarioController</url-pattern>
     </servlet-mapping>
-    
-    
-    
-    
     
     <session-config>
         <session-timeout>

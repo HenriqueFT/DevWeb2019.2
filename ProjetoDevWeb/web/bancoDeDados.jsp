@@ -66,7 +66,6 @@
                 </a>
             </div>
         </div>
-
         <%
             String show = "";
 
@@ -80,7 +79,6 @@
             
             if(show.equalsIgnoreCase("Produtos")){
         %>
-        
         <!--Tabela mostrando todos os produtos, se utilizando de taglib para pegar eles do request-->
         <div class="tabelasBanco container-fluid">
             <a href="ProdutoController?action=insert&id=0">
@@ -111,8 +109,6 @@
         <%
         }else if(show.equalsIgnoreCase("Usuarios")){
         %>
-        
-        
         <!--Tabela para se ver os Usuarios-->
         <div class="tabelasBanco container-fluid">
             <a href="UsuarioController?action=insert&id=0">
@@ -156,7 +152,6 @@
         <script src="style/jquery-3.4.1.min.js"></script>
         <script src="style/bootstrap/js/bootstrap.min.js"></script>
     </body>
-    
     <%
         }else{
     %>

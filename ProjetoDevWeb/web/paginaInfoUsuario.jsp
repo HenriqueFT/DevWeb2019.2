@@ -79,10 +79,10 @@
             </div>
             <div class="row">
                 <div class="col-3">
-                    <h1>FAVORITOS : </h1>
+                    <h1></h1>
                 </div>
                 <div class="col-9">
-                    <h1 class="text-justify"><% out.println(usuLog.getNome()); %></h1>
+                    <h1 class="text-justify"></h1>
                 </div>
             </div>
             <a href="UsuarioController?action=update&id=<% out.println(usuLog.getUserId());%>" >

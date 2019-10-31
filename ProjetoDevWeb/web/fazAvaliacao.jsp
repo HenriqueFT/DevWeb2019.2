@@ -2,7 +2,6 @@
 <%@page import="DAO.AvaliacaoDAO"%>
 <%@page import="modelos.Usuario"%>
 <%@page import="modelos.Avaliacao"%>
-
 <%
     Usuario usuLog = null;
     if (request.getSession().getAttribute("usuarioLogado") != null) {

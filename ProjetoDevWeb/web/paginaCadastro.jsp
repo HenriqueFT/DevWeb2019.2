@@ -1,5 +1,5 @@
 <%-- 
-    Document   : paginaLoginOuCadastro
+    Document   : paginaCadastro
     Created on : 15/10/2019, 22:03:36
     Author     : julia
 --%>

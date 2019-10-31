@@ -58,5 +58,4 @@ public class Compra {
     private double totalCarrinho;
     
     
-    
 }

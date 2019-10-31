@@ -38,6 +38,4 @@ public class Avaliacao {
         this.nota = nota;
     }
 
-
-    
 }
