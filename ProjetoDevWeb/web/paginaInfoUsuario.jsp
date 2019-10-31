@@ -14,9 +14,12 @@
 <!DOCTYPE html>
 <html>
     <%
-    Usuario usuario = null;
+   
+    
     if(request.getSession().getAttribute("usuarioLogado")!= null){
-        usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
+        UsuarioDAO usuarioDAO = new UsuarioDAO();  
+        Usuario usuario = null;
+        usuario = (Usuario)request.getSession().getAttribute("usuarioLogado");
         request.setAttribute("usuario", usuario);
     %>
     <head>
@@ -58,15 +61,11 @@
         </nav>
         
         <div class="midBody">
-            <div class="container-fluid">
-                <h1>
-                    <%
-                        out.println(usuario.getEmail()+ " | "+ usuario.getCpf());
-                    %>
-                </h1>
-                
-                
-            </div>
+            <h1 class="tituloFilme"><% out.println(usuario.getNome()); %></h1>
+            <h1 class="text-justify"><% out.println(usuario.getEmail()); %></h1>
+            <h1 class="text-justify"><% out.println(usuario.getEndereco()); %></h1>
+            <h1 class="text-justify"><% out.println(usuario.getNome()); %></h1>
+            
         </div>
         <%
         }else{ 
@@ -74,9 +73,6 @@
         <jsp:forward page="pleaseLogin.jsp" /> 
         <%}%>
         
-        
-        <script src="style/jquery-3.4.1.min.js"></script>
-        <script src="style/bootstrap/js/bootstrap.min.js"></script>
     </body>
 </html>    
 

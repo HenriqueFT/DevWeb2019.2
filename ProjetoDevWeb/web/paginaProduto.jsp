@@ -1,3 +1,4 @@
+<%@page import="modelos.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@page import="util.FormataPreco"%>
@@ -15,9 +16,8 @@
 <%@include file="include/checkCookieCarrinho.jsp" %>
 
 <%
-    Usuario usuLog = new Usuario();
-    usuLog.setUserId(1);
-    request.getSession().setAttribute("usuarioLogado", usuLog);
+    Usuario usuLog = null;
+
     if(request.getSession().getAttribute("usuarioLogado") != null){
         usuLog = (Usuario) request.getSession().getAttribute("usuarioLogado") ;
     }
@@ -34,6 +34,7 @@
         ProdutoDAO crudProduto = new ProdutoDAO();
         Produto produto = crudProduto.getProduto(Integer.parseInt(request.getParameter("id")));
     %>
+    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="style/bootstrap/css/bootstrap.css">
@@ -60,7 +61,9 @@
                 <div class="navbar-right">
                     <div class="collapse navbar-collapse ">
                         <div class="navbar-nav">
+                            <%if(usuLog != null && usuLog.getIsAdm()==1){%>
                             <a href="ProdutoController?show=Produtos" data-toggle="tooltip" title="Banco de Dados"><span class="nav-item nav-link fas fa-database" ></span></a>
+                            <%}%>
                             <a href="UsuarioController?action=login" data-toggle="tooltip" title="Login"><span class="nav-item nav-link fas fa-door-open"></span></a>
                             <a href="paginaInfoUsuario.jsp" data-toggle="tooltip" title="Perfil"><span class="nav-item nav-link fas fa-user"></span></a>
                             <a href="paginaCarrinho.jsp" data-toggle="tooltip" title="Carrinho"><span class="nav-item nav-link fas fa-shopping-cart"></span></a>
