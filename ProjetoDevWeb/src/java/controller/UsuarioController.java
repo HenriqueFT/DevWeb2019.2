@@ -20,6 +20,7 @@ import modelos.Usuario;
 import modelos.Usuario;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.servlet.http.Cookie;
 
 //
 //------------------Todos os controllers com formato de CRUD podem ser assim,-----------------------
@@ -35,6 +36,7 @@ public class UsuarioController extends HttpServlet {
     private static String LOGIN = "/paginaLogin.jsp";
     private static String LOGINMESSAGE ="/loginMessage.jsp";
     private static String LIST_USUARIO = "/bancoDeDados.jsp";
+    private static String SHOW_CURRENT_USUARIO = "/paginaInfoUsuario.jsp";
     private UsuarioDAO dao;
     
     private static String NOME="nome";
@@ -72,7 +74,21 @@ public class UsuarioController extends HttpServlet {
         if(dao.getUsuarios()!=null){
             System.out.println("");
         }
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            Cookie[] cookies = request.getCookies();
+            String usur=null;
+            if(cookies!=null){
             
+            for (int i = 0; i < cookies.length; i++) {
+                if(cookies[i].getName().equals("idUsuario")){
+                    usur = cookies[i].getValue();
+                }
+            }
+            }
+            Usuario usuario = null;
+            if(usur!=null){
+            usuario = dao.getUsuario(Integer.parseInt(usur));
+            }
         if (action == null){   
             forward = LIST_USUARIO;
             request.setAttribute("UsuarioDAO", dao.getUsuarios());
@@ -85,7 +101,7 @@ public class UsuarioController extends HttpServlet {
         } else if (action.equalsIgnoreCase("update")){
             forward = UPDATE;
             int id = Integer.parseInt(request.getParameter("id"));
-            Usuario usuario = dao.getUsuario(id);
+            usuario = dao.getUsuario(id);
             request.setAttribute("action", "update");
             request.setAttribute("Usuario", usuario);  
         } else if (action.equalsIgnoreCase("delete")){
@@ -96,7 +112,10 @@ public class UsuarioController extends HttpServlet {
         }  else if(action.equalsIgnoreCase("login")){
             forward = LOGIN;
             request.setAttribute("action", "login");
-        }else{
+        }else if (action.equalsIgnoreCase("showUsuario")){
+            forward = SHOW_CURRENT_USUARIO;
+            request.setAttribute("usuarioLogado", usuario);
+        }  else{
             forward = INSERT;
         }
  
@@ -176,6 +195,9 @@ public class UsuarioController extends HttpServlet {
         
         if(s.equals("login")){
             usuario=dao.loginUsuario(usuario.getEmail(), usuario.getSenha());
+            System.out.println(usuario.getNome());
+            Cookie idUser = new Cookie("idUsuario",""+usuario.getUserId());
+            System.out.println(usuario.getCpf()+"antes Session");
             
             request.getSession().setAttribute("usuarioLogado", usuario);
             
@@ -188,8 +210,10 @@ public class UsuarioController extends HttpServlet {
                 System.out.println("LOGIN INCORRETO");
                 request.setAttribute("loginSucess", "false");
             }
-            
+            response.addCookie(idUser);
            //TEM QUE FAZER A PARADA  DO COOKIE AQUI
+           System.out.println(usuario.getEmail());
+
             
         }else if(s.equals("update")){
             dao.updateUsuario(usuario);

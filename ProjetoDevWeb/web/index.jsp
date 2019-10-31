@@ -3,6 +3,7 @@
     Created on : 08/10/2019, 19:07:11
     Author     : Usuario
 --%>
+<%@page import="DAO.UsuarioDAO"%>
 <%@page import="modelos.Usuario"%>
 <%@page import="util.FormataPreco"%>
 <%@page import="java.util.Iterator"%>
@@ -43,7 +44,23 @@
     </head>
 
     <body>
+
         <!-- Navbar basicamente se utilizando de cosias do bootstrap, eh utilizado em quase todas as paginas do site-->
+
+        <%
+            
+            Usuario usu= new Usuario();
+            if(request.getSession().getAttribute("usuarioLogado")!=null){
+                usu = (Usuario) request.getSession().getAttribute("usuarioLogado") ;
+            }
+            
+        %>
+        <%
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            List<Produto> produtos = produtoDAO.getProdutos();
+            Iterator<Produto> iProdutos = produtos.iterator();
+        %> 
+
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top my-nav">
             <div class="container-fluid">
                 <!--Parte  que fica a esquerda como titulo-->
@@ -61,7 +78,7 @@
                             <a href="ProdutoController?show=Produtos" data-toggle="tooltip" title="Banco de Dados"><span class="nav-item nav-link fas fa-database" ></span></a>
                             <%}%>
                             <a href="UsuarioController?action=login" data-toggle="tooltip" title="Login"><span class="nav-item nav-link fas fa-door-open"></span></a>
-                            <a href="paginaInfoUsuario.jsp" data-toggle="tooltip" title="Perfil"><span class="nav-item nav-link fas fa-user"></span></a>
+                            <a href="UsuarioController?action=showUsuario" data-toggle="tooltip" title="Perfil"><span class="nav-item nav-link fas fa-user"></span></a>
                             <a href="paginaCarrinho.jsp" data-toggle="tooltip" title="Carrinho"><span class="nav-item nav-link fas fa-shopping-cart"></span></a>
                         </div>                   
                     </div> 
