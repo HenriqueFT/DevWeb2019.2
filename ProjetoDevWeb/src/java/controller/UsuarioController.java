@@ -35,7 +35,7 @@ public class UsuarioController extends HttpServlet {
     private static String UPDATE = "/paginaUsuarioUpdate.jsp";            //<-- Essas3 ainda nao estao corretas
     private static String LOGIN = "/paginaLogin.jsp";
     private static String LOGINMESSAGE ="/loginMessage.jsp";
-    private static String LIST_USUARIO = "/bancoDeDados.jsp";
+    private static String LIST_USUARIO = "/index.jsp";
     private static String SHOW_CURRENT_USUARIO = "/paginaInfoUsuario.jsp";
     private UsuarioDAO dao;
     
@@ -171,39 +171,17 @@ public class UsuarioController extends HttpServlet {
         usuario.setSenha(senhaEncriptada);
         
         
-        //--------------------Fazer checagem se eh adm depois------------------ 
-         
-              /*CODIGO  DO PROFESSOR
-        String administrador = request.getParameter("admin");
-        if (administrador == null || "".equals(administrador)){
-            administrador = "0";
-        }
-        user.setAdmin(Integer.parseInt(administrador));
-        // data de acesso eh controlada pelo BD
-        dao.checkUser(user);
-        */
-        
-        //--------------------O que estou incluindo
-        /*Temos que ver qual o usuario da sessao e ver se eh adm
-            if(Usuario.isADM(usuario)){
-             dao.addProduto(produto);
-            }
-        */
-        
-        
         RequestDispatcher view = request.getRequestDispatcher(LIST_USUARIO);
         
         if(s.equals("login")){
             usuario=dao.loginUsuario(usuario.getEmail(), usuario.getSenha());
-            System.out.println(usuario.getNome());
             Cookie idUser = new Cookie("idUsuario",""+usuario.getUserId());
-            System.out.println(usuario.getCpf()+"antes Session");
             
             request.getSession().setAttribute("usuarioLogado", usuario);
             
             view = request.getRequestDispatcher(LOGINMESSAGE);
             
-            if(usuario!=null){
+            if(usuario.getCpf()!=null){
                 System.out.println("LOGIN FUNCIONOU");
                 request.setAttribute("loginSucess", "true");
             }else{
@@ -211,9 +189,6 @@ public class UsuarioController extends HttpServlet {
                 request.setAttribute("loginSucess", "false");
             }
             response.addCookie(idUser);
-           //TEM QUE FAZER A PARADA  DO COOKIE AQUI
-           System.out.println(usuario.getEmail());
-
             
         }else if(s.equals("update")){
             dao.updateUsuario(usuario);

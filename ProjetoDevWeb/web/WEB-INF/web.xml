@@ -15,6 +15,16 @@
         <url-pattern>/xxxController</url-pattern>
     </servlet-mapping>
     
+    
+    <servlet>
+        <servlet-name>CarrinhoController</servlet-name>
+        <servlet-class>controller.CarrinhoController</servlet-class>
+    </servlet> 
+    <servlet-mapping>
+        <servlet-name>CarrinhoController</servlet-name>
+        <url-pattern>/CarrinhoController</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
         <servlet-name>ProdutoController</servlet-name>
         <servlet-class>controller.ProdutoController</servlet-class>
@@ -32,6 +42,10 @@
         <servlet-name>usuarioController</servlet-name>
         <url-pattern>/usuarioController</url-pattern>
     </servlet-mapping>
+    
+    
+    
+    
     
     <session-config>
         <session-timeout>

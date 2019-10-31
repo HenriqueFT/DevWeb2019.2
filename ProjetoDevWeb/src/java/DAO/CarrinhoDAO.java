@@ -84,11 +84,11 @@ public class CarrinhoDAO {
         }
     }
 
-    public void deleteCarrinho(int id) {
+    public void deleteCarrinho() {
         try {
             Connection conn=Database.getConnection();
             PreparedStatement preparedStatement = conn.prepareStatement("delete from carrinho where idCarrinho=?");
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, this.id);
             preparedStatement.executeUpdate();
  
         } catch (SQLException e) {

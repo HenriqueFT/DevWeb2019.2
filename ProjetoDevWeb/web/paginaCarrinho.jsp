@@ -37,7 +37,7 @@
     %>
     
     <head>
-        <title>Nav</title>
+        <title>Carrinho</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
        
@@ -74,7 +74,7 @@
            </div>
        </nav>
                            
-        <div class="midBody">                   
+        <div class="midBody container-fluid">                   
             <table>
                 <thead>
                     <tr>
@@ -113,9 +113,16 @@
 
 
             <br>
-            <a href='index.jsp'> Continuar comprando </a>
+                <a href='index.jsp'> Continuar comprando </a>
             <br>
-            <a href='index.jsp'> Fechar compra </a>
+            <%
+                if(usuLog.getIsAdm()==1){
+                    out.println("<a href=\"CarrinhoController?action=finaliza&id=" + idCarrinho + "\"> Fechar compra </a>");
+                }else{
+                    out.println("<h4>Por favor faca login para finalizar acompra, depois volte aqui</h4>");
+                }
+            %>
+
             
         </div> 
          

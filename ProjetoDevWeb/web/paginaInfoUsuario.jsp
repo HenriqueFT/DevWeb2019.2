@@ -13,15 +13,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <%
-   
-    
-    if(request.getSession().getAttribute("usuarioLogado")!= null){
-        UsuarioDAO usuarioDAO = new UsuarioDAO();  
-        Usuario usuario = null;
-        usuario = (Usuario)request.getSession().getAttribute("usuarioLogado");
-        request.setAttribute("usuario", usuario);
-    %>
+        <%
+            Usuario usuLog= new Usuario();
+            if(request.getSession().getAttribute("usuarioLogado")!=null){
+                usuLog = (Usuario) request.getSession().getAttribute("usuarioLogado") ;
+            
+        %>
     <head>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -32,7 +29,7 @@
         
         <script src="https://kit.fontawesome.com/c6f434d274.js" crossorigin="anonymous"></script>
         
-        <% out.println("<title>Perfil do Usuario: - " + usuario.getNome() + "</title>"); %>
+        <% out.println("<title>Perfil do Usuario: - " + usuLog.getNome() + "</title>"); %>
     </head>
     <body>
 
@@ -50,9 +47,11 @@
                 <div class="navbar-right">
                     <div class="collapse navbar-collapse ">
                         <div class="navbar-nav">
+                            <%if(usuLog.getIsAdm()==1){%>
                             <a href="ProdutoController?show=Produtos" data-toggle="tooltip" title="Banco de Dados"><span class="nav-item nav-link fas fa-database" ></span></a>
+                            <%}%>
                             <a href="UsuarioController?action=login" data-toggle="tooltip" title="Login"><span class="nav-item nav-link fas fa-door-open"></span></a>
-                            <a href="paginaInfoUsuario.jsp" data-toggle="tooltip" title="Perfil"><span class="nav-item nav-link fas fa-user"></span></a>
+                            <a href="UsuarioController?action=showUsuario" data-toggle="tooltip" title="Perfil"><span class="nav-item nav-link fas fa-user"></span></a>
                             <a href="paginaCarrinho.jsp" data-toggle="tooltip" title="Carrinho"><span class="nav-item nav-link fas fa-shopping-cart"></span></a>
                         </div>                   
                     </div> 
@@ -60,13 +59,15 @@
             </div>
         </nav>
         
-        <div class="midBody">
-            <h1 class="tituloFilme"><% out.println(usuario.getNome()); %></h1>
-            <h1 class="text-justify"><% out.println(usuario.getEmail()); %></h1>
-            <h1 class="text-justify"><% out.println(usuario.getEndereco()); %></h1>
-            <h1 class="text-justify"><% out.println(usuario.getNome()); %></h1>
-            
+        <div class="midBody container-fluid">
+            <h1 class="tituloFilme"><% out.println(usuLog.getNome()); %></h1>
+            <h1 class="text-justify"><% out.println(usuLog.getEmail()); %></h1>
+            <h1 class="text-justify"><% out.println(usuLog.getEndereco()); %></h1>
+            <h1 class="text-justify"><% out.println(usuLog.getNome()); %></h1> 
         </div>
+        
+        
+        
         <%
         }else{ 
         %>
