@@ -15,7 +15,7 @@
         <title>Obrigado por  comprar</title>
     </head>
     <body>
-        <div class="basicPage container-fluid">
+        <div class="basicPage container-fluid" style="text-align: center">
             <h1>OBRIGADO PELA COMPRA!</h1>
             <br>
             <h2>VOLTE SEMPRE</h2>
