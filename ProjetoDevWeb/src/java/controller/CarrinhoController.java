@@ -12,8 +12,7 @@ import modelos.Carrinho;
 
 @WebServlet(name = "CarrinhoController", urlPatterns = {"/CarrinhoController"})
 public class CarrinhoController extends HttpServlet {
-    private static String BASE = "/index.jsp";
-    private static String FINALIZA = "/finalizaCompra.jsp";
+    private static String FINALIZA = "/index.jsp";
    
     //ID Nome Descricao Preco Imagem Estoque
 
@@ -30,7 +29,7 @@ public class CarrinhoController extends HttpServlet {
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String forward = BASE;
+        String forward = "/index.jsp";
         String action = "Finaliza";
         
         try {

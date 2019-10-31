@@ -5,13 +5,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="style/bootstrap/css/bootstrap.css">
-        <link rel="stylesheet" href="style/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="style/style.css">
-        <title>Produto Forms</title>
+        <title>Forms</title>
     </head>
     <body>
-        <div class="basicPage container-fluid">
         <% if(request.getAttribute("produto") != null || request.getAttribute("produto") == null ){ %>
         <h1>Adicione ou inclua</h1>
         <form method="POST" action="ProdutoController" name="formAddProduto" id="produtoForm">
@@ -69,6 +65,5 @@
         <h1>Houve um erro!!!</h1>
         <%}%>
         <a href="index.jsp">Voltar a pagina principal</a>
-        </div>
     </body>
 </html>

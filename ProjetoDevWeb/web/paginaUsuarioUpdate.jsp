@@ -7,25 +7,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="style/bootstrap/css/bootstrap.css">
-        <link rel="stylesheet" href="style/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="style/style.css">
-        <title>Update usuario</title>
+        <title>JSP Page</title>
     </head>
     <body>
-        <div class="basicPage container-fluid">
         <% 
         request.getSession().setAttribute("action", "update");
         Usuario usuario= new Usuario();
-        String temp = (String) request.getSession().getAttribute("db");
-        
         if(request.getSession().getAttribute("usuarioLogado")!=null){
            usuario = (Usuario) request.getSession().getAttribute("usuarioLogado"); 
            request.setAttribute("usuario", usuario);
-           
-            if(temp.equalsIgnoreCase("true")){
-
-            }
         %>
         <form method="POST" action="UsuarioController" name="formEditUsuario" id="formEditUsuario">
             <table class="tableForm">
@@ -103,7 +93,6 @@
         }else{
         %>    
         <jsp:forward page="pleaseLogin.jsp" /> 
-        <%}%>
-        </div>
+        <%}%>        
     </body>
 </html>
