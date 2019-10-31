@@ -30,12 +30,12 @@ import javax.servlet.http.Cookie;
 @WebServlet(name = "UsuarioController", urlPatterns = {"/UsuarioController"})
 
 public class UsuarioController extends HttpServlet {
-
+    private static String BASE = "/index.jsp";
     private static String INSERT = "/paginaCadastro.jsp";
     private static String UPDATE = "/paginaUsuarioUpdate.jsp";            //<-- Essas3 ainda nao estao corretas
     private static String LOGIN = "/paginaLogin.jsp";
     private static String LOGINMESSAGE ="/loginMessage.jsp";
-    private static String LIST_USUARIO = "/index.jsp";
+    private static String LIST_USUARIO = "/bancoDeDados.jsp";
     private static String SHOW_CURRENT_USUARIO = "/paginaInfoUsuario.jsp";
     private UsuarioDAO dao;
     
@@ -68,7 +68,7 @@ public class UsuarioController extends HttpServlet {
         } catch(Exception e){
             show = "Usuarios";
         }
-        
+
         request.setAttribute("show", show);
         
         if(dao.getUsuarios()!=null){
@@ -171,7 +171,7 @@ public class UsuarioController extends HttpServlet {
         usuario.setSenha(senhaEncriptada);
         
         
-        RequestDispatcher view = request.getRequestDispatcher(LIST_USUARIO);
+        RequestDispatcher view = request.getRequestDispatcher(BASE);
         
         if(s.equals("login")){
             usuario=dao.loginUsuario(usuario.getEmail(), usuario.getSenha());

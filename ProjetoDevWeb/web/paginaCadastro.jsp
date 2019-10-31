@@ -9,9 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="style/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="style/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style/style.css">
         <title>Cadastro de Usuário</title>
     </head>
     <body>
+        <div class="basicPage container-fluid">
         <h3>Ainda não possui uma conta?</h3>
         <h4>Insira suas informações abaixo:</h4>
         
@@ -54,6 +58,6 @@
         </form>
         
         <h4>Já é cadastrado? <a href="UsuarioController?action=login">Faça login!</a>
-        
+        </div>
     </body>
 </html>

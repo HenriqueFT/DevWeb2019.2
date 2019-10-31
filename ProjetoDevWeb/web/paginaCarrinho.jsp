@@ -74,7 +74,7 @@
            </div>
        </nav>
                            
-        <div class="midBody container-fluid">                   
+        <div class="carStyle midBody container-fluid">                   
             <table>
                 <thead>
                     <tr>
@@ -116,7 +116,7 @@
                 <a href='index.jsp'> Continuar comprando </a>
             <br>
             <%
-                if(usuLog.getIsAdm()==1){
+                if(usuLog.getCpf()!=null){
                     out.println("<a href=\"CarrinhoController?action=finaliza&id=" + idCarrinho + "\"> Fechar compra </a>");
                 }else{
                     out.println("<h4>Por favor faca login para finalizar acompra, depois volte aqui</h4>");
